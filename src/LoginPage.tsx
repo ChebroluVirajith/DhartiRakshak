@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { ChevronLeft, Check, Lock, Leaf, Loader2 } from 'lucide-react';
 import { RecaptchaVerifier, signInWithPhoneNumber, ConfirmationResult } from 'firebase/auth';
 import { auth } from './firebase';
+import { useLanguage } from './LanguageContext';
 
 interface LoginPageProps {
   onBack: () => void;
@@ -9,6 +10,7 @@ interface LoginPageProps {
 }
 
 const LoginPage: React.FC<LoginPageProps> = ({ onBack, onLoginSuccess }) => {
+  const { t } = useLanguage();
   const [phoneNumber, setPhoneNumber] = useState('');
   const [otp, setOtp] = useState('');
   const [confirmationResult, setConfirmationResult] = useState<ConfirmationResult | null>(null);
@@ -50,7 +52,7 @@ const LoginPage: React.FC<LoginPageProps> = ({ onBack, onLoginSuccess }) => {
       
       const result = await signInWithPhoneNumber(auth, formattedPhoneNumber, appVerifier);
       setConfirmationResult(result);
-      alert(`OTP sent to ${formattedPhoneNumber}`);
+      alert(t.login.otpSent);
     } catch (err: any) {
       setError(err.message || 'Failed to send OTP. Please check the phone number and try again.');
       console.error(err);
@@ -90,20 +92,20 @@ const LoginPage: React.FC<LoginPageProps> = ({ onBack, onLoginSuccess }) => {
       <div className="bg-white rounded-xl shadow-2xl max-w-md w-full p-8 space-y-6">
         <button onClick={onBack} className="flex items-center text-gray-600 hover:text-gray-900 transition-colors">
           <ChevronLeft className="h-5 w-5 mr-1" />
-          <span className="text-sm font-medium">Back to Home</span>
+          <span className="text-sm font-medium">{t.common.back}</span>
         </button>
         <div className="flex items-center justify-center space-x-3 mb-6">
           <div className="bg-gradient-to-r from-green-500 to-emerald-600 p-2 rounded-lg">
             <Leaf className="h-8 w-8 text-white" />
           </div>
           <div>
-            <h1 className="text-xl font-bold text-gray-900">AgriGame</h1>
-            <p className="text-sm text-gray-600">Dharti Rakshak Platform</p>
+            <h1 className="text-xl font-bold text-gray-900">{t.header.appName}</h1>
+            <p className="text-sm text-gray-600">{t.header.subtitle}</p>
           </div>
         </div>
-        <h2 className="text-2xl font-bold text-center text-gray-900">Login to your account</h2>
+        <h2 className="text-2xl font-bold text-center text-gray-900">{t.login.welcome}</h2>
         <p className="text-center text-gray-600">
-          Enter your phone number to receive a one-time password (OTP).
+          {t.login.subtitle}
         </p>
 
         {error && (
@@ -115,7 +117,7 @@ const LoginPage: React.FC<LoginPageProps> = ({ onBack, onLoginSuccess }) => {
         {!confirmationResult ? (
           <div className="space-y-4">
             <div>
-              <label htmlFor="phone-number" className="sr-only">Phone Number</label>
+              <label htmlFor="phone-number" className="sr-only">{t.login.phoneNumber}</label>
               <div className="relative rounded-lg shadow-sm">
                 <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                   <span className="text-gray-500 sm:text-sm">+91</span>
@@ -129,7 +131,7 @@ const LoginPage: React.FC<LoginPageProps> = ({ onBack, onLoginSuccess }) => {
                   value={phoneNumber}
                   onChange={(e) => setPhoneNumber(e.target.value)}
                   className="block w-full pl-10 pr-3 py-3 border border-gray-300 rounded-lg placeholder-gray-400 focus:outline-none focus:ring-green-500 focus:border-green-500 sm:text-sm"
-                  placeholder="Enter your phone number"
+                  placeholder={t.login.enterPhone}
                 />
               </div>
             </div>
@@ -144,7 +146,7 @@ const LoginPage: React.FC<LoginPageProps> = ({ onBack, onLoginSuccess }) => {
               ) : (
                 <Check className="h-5 w-5 mr-2" />
               )}
-              {loading ? 'Sending...' : 'Send OTP'}
+              {loading ? t.common.loading : t.login.getOTP}
             </button>
           </div>
         ) : (
@@ -164,7 +166,7 @@ const LoginPage: React.FC<LoginPageProps> = ({ onBack, onLoginSuccess }) => {
                   value={otp}
                   onChange={(e) => setOtp(e.target.value)}
                   className="block w-full pl-10 pr-3 py-3 border border-gray-300 rounded-lg placeholder-gray-400 focus:outline-none focus:ring-green-500 focus:border-green-500 sm:text-sm"
-                  placeholder="Enter OTP"
+                  placeholder={t.login.enterOTP}
                 />
               </div>
             </div>
@@ -179,7 +181,7 @@ const LoginPage: React.FC<LoginPageProps> = ({ onBack, onLoginSuccess }) => {
               ) : (
                 <Check className="h-5 w-5 mr-2" />
               )}
-              {loading ? 'Verifying...' : 'Login'}
+              {loading ? t.common.loading : t.login.verifyOTP}
             </button>
           </div>
         )}

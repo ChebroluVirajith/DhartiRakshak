@@ -4,6 +4,7 @@ import {
   Zap, TrendingUp, CheckCircle, Shield, Crown, Camera, Brain, Coins,
   MessageCircle, Globe, Sparkles, TreePine, Bug, Gift
 } from 'lucide-react';
+import { useLanguage } from './LanguageContext';
 
 interface Quest {
   id: string;
@@ -75,6 +76,7 @@ interface AppProps {
 }
 
 function App({ onLoginClick, userName, userLocation }: AppProps) {
+  const { t } = useLanguage();
   const [activeTab, setActiveTab] = useState('dashboard');
   const [showAIOracle, setShowAIOracle] = useState(false);
 
@@ -229,9 +231,9 @@ function App({ onLoginClick, userName, userLocation }: AppProps) {
               <div className="bg-gradient-to-r from-green-500 to-emerald-600 p-2 rounded-lg">
                 <Leaf className="h-8 w-8 text-white" />
               </div>
-              <div>
-                <h1 className="text-xl font-bold text-gray-900">AgriGame</h1>
-                <p className="text-sm text-gray-600">Dharti Rakshak Platform</p>
+            <div>
+                <h1 className="text-xl font-bold text-gray-900">{t.header.appName}</h1>
+                <p className="text-sm text-gray-600">{t.header.subtitle}</p>
               </div>
             </div>
             
@@ -240,12 +242,12 @@ function App({ onLoginClick, userName, userLocation }: AppProps) {
               <div className="flex items-center space-x-2">
                 <Coins className="h-5 w-5 text-yellow-500" />
                 <span className="font-semibold text-gray-900">{farmer.greenCredits}</span>
-                <span className="text-sm text-gray-600">Credits</span>
+                <span className="text-sm text-gray-600">{t.header.credits}</span>
               </div>
               <div className="flex items-center space-x-2">
                 <Zap className="h-5 w-5 text-orange-500" />
                 <span className="font-semibold text-gray-900">{farmer.streakDays}</span>
-                <span className="text-sm text-gray-600">Day Streak</span>
+                <span className="text-sm text-gray-600">{t.header.dayStreak}</span>
               </div>
             </div>
 
@@ -255,7 +257,7 @@ function App({ onLoginClick, userName, userLocation }: AppProps) {
                 className="bg-gradient-to-r from-purple-500 to-indigo-600 text-white px-3 py-2 rounded-lg text-sm font-medium hover:from-purple-600 hover:to-indigo-700 transition-all flex items-center space-x-2"
               >
                 <Brain className="h-4 w-4" />
-                <span>Krishi Rishi</span>
+                <span>{t.header.aiOracle}</span>
               </button>
               {userName ? (
                 <>
@@ -278,7 +280,7 @@ function App({ onLoginClick, userName, userLocation }: AppProps) {
                   onClick={onLoginClick}
                   className="bg-green-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-green-700 transition-colors"
                 >
-                  Signup/Login
+                  {t.header.signupLogin}
                 </button>
               )}
             </div>
@@ -291,12 +293,12 @@ function App({ onLoginClick, userName, userLocation }: AppProps) {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex space-x-8">
             {[
-              { id: 'dashboard', name: 'Dashboard', icon: Target },
-              { id: 'quests', name: 'My Quests', icon: Zap },
-              { id: 'guild', name: 'My Guild', icon: Shield },
-              { id: 'leaderboard', name: 'Leaderboard', icon: Trophy },
-              { id: 'community', name: 'Community', icon: Users },
-              { id: 'marketplace', name: 'Mandi', icon: Gift }
+              { id: 'dashboard', name: t.navigation.dashboard, icon: Target },
+              { id: 'quests', name: t.navigation.myQuests, icon: Zap },
+              { id: 'guild', name: t.navigation.myGuild, icon: Shield },
+              { id: 'leaderboard', name: t.navigation.leaderboard, icon: Trophy },
+              { id: 'community', name: t.navigation.community, icon: Users },
+              { id: 'marketplace', name: t.navigation.marketplace, icon: Gift }
             ].map((tab) => {
               const Icon = tab.icon;
               return (
@@ -327,7 +329,7 @@ function App({ onLoginClick, userName, userLocation }: AppProps) {
                 <div className="bg-gradient-to-r from-purple-500 to-indigo-600 p-2 rounded-lg">
                   <Brain className="h-6 w-6 text-white" />
                 </div>
-                <h3 className="text-lg font-semibold text-gray-900">Krishi Rishi AI Oracle</h3>
+                <h3 className="text-lg font-semibold text-gray-900">{t.aiOracle.krishiRishiAIOracle}</h3>
               </div>
               <button 
                 onClick={() => setShowAIOracle(false)}
@@ -338,18 +340,18 @@ function App({ onLoginClick, userName, userLocation }: AppProps) {
             </div>
             <div className="space-y-4">
               <div className="bg-gradient-to-r from-purple-50 to-indigo-50 rounded-lg p-4">
-                <h4 className="font-semibold text-purple-800 mb-2">🔍 Plant Doctor</h4>
-                <p className="text-sm text-purple-700 mb-3">Snap a photo of diseased plants, pests, or weeds for instant identification and treatment quests.</p>
+                <h4 className="font-semibold text-purple-800 mb-2">🔍 {t.aiOracle.plantDoctor}</h4>
+                <p className="text-sm text-purple-700 mb-3">{t.aiOracle.plantDoctorDescription}</p>
                 <button className="bg-purple-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-purple-700 transition-colors flex items-center space-x-2">
                   <Camera className="h-4 w-4" />
-                  <span>Take Photo</span>
+                  <span>{t.aiOracle.takePhoto}</span>
                 </button>
               </div>
               <div className="bg-gradient-to-r from-green-50 to-emerald-50 rounded-lg p-4">
-                <h4 className="font-semibold text-green-800 mb-2">🌱 Crop Advisor</h4>
-                <p className="text-sm text-green-700 mb-3">Get personalized farming advice based on your location, season, and crop type.</p>
+                <h4 className="font-semibold text-green-800 mb-2">🌱 {t.aiOracle.cropAdvisor}</h4>
+                <p className="text-sm text-green-700 mb-3">{t.aiOracle.cropAdvisorDescription}</p>
                 <button className="bg-green-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-green-700 transition-colors">
-                  Get Advice
+                  {t.aiOracle.getAdvice}
                 </button>
               </div>
             </div>
@@ -366,10 +368,10 @@ function App({ onLoginClick, userName, userLocation }: AppProps) {
               <div className="flex items-center justify-between mb-4">
                 <h3 className="text-lg font-semibold flex items-center">
                   <Sparkles className="h-5 w-5 mr-2" />
-                  Prakriti Paheli (Nature's Riddle)
+                  {t.dashboard.dailyRiddle}
                 </h3>
                 <div className="bg-white bg-opacity-20 px-3 py-1 rounded-full text-sm">
-                  Daily Challenge
+                  {t.dashboard.dailyChallenge}
                 </div>
               </div>
               <p className="text-indigo-100 mb-4">{dailyRiddle.question}</p>
@@ -394,11 +396,11 @@ function App({ onLoginClick, userName, userLocation }: AppProps) {
                     <Bug className="h-8 w-8" />
                   </div>
                   <div>
-                    <h3 className="text-xl font-bold">Boss Battle: {bossChallenge.name}</h3>
+                    <h3 className="text-xl font-bold">{t.dashboard.bossChallenge}: {bossChallenge.name}</h3>
                     <p className="text-red-100">{bossChallenge.description}</p>
                     <div className="flex items-center space-x-4 mt-2 text-sm">
-                      <span>{bossChallenge.participants} farmers participating</span>
-                      <span>⏰ {bossChallenge.timeLeft} left</span>
+                      <span>{bossChallenge.participants} {t.dashboard.farmersParticipating}</span>
+                      <span>⏰ {bossChallenge.timeLeft} {t.dashboard.timeLeft}</span>
                     </div>
                   </div>
                 </div>
@@ -419,7 +421,7 @@ function App({ onLoginClick, userName, userLocation }: AppProps) {
               <div className="bg-white rounded-xl shadow-lg border border-green-100 p-6">
                 <div className="flex items-center justify-between">
                   <div>
-                    <p className="text-sm font-medium text-gray-600">Farm Aura Health</p>
+                    <p className="text-sm font-medium text-gray-600">{t.dashboard.farmAuraHealth}</p>
                     <p className="text-3xl font-bold text-green-600">{farmer.auraHealth}%</p>
                   </div>
                   <div className={`bg-gradient-to-r ${getAuraColor(farmer.auraHealth)} p-3 rounded-lg`}>
@@ -443,7 +445,7 @@ function App({ onLoginClick, userName, userLocation }: AppProps) {
               <div className="bg-white rounded-xl shadow-lg border border-blue-100 p-6">
                 <div className="flex items-center justify-between">
                   <div>
-                    <p className="text-sm font-medium text-gray-600">Level & Title</p>
+                    <p className="text-sm font-medium text-gray-600">{t.dashboard.levelTitle}</p>
                     <p className="text-2xl font-bold text-blue-600">{farmer.level}</p>
                     <p className="text-xs text-blue-600 font-medium">{farmer.title}</p>
                   </div>
@@ -457,7 +459,7 @@ function App({ onLoginClick, userName, userLocation }: AppProps) {
               <div className="bg-white rounded-xl shadow-lg border border-yellow-100 p-6">
                 <div className="flex items-center justify-between">
                   <div>
-                    <p className="text-sm font-medium text-gray-600">Green Credits</p>
+                    <p className="text-sm font-medium text-gray-600">{t.dashboard.greenCredits}</p>
                     <p className="text-3xl font-bold text-yellow-600">{farmer.greenCredits}</p>
                   </div>
                   <div className="bg-yellow-100 p-3 rounded-lg">
@@ -470,7 +472,7 @@ function App({ onLoginClick, userName, userLocation }: AppProps) {
               <div className="bg-white rounded-xl shadow-lg border border-purple-100 p-6">
                 <div className="flex items-center justify-between">
                   <div>
-                    <p className="text-sm font-medium text-gray-600">Guild Rank</p>
+                    <p className="text-sm font-medium text-gray-600">{t.dashboard.guildRank}</p>
                     <p className="text-3xl font-bold text-purple-600">#{guild.rank}</p>
                   </div>
                   <div className="bg-purple-100 p-3 rounded-lg">
@@ -485,33 +487,33 @@ function App({ onLoginClick, userName, userLocation }: AppProps) {
             <div className="bg-white rounded-xl shadow-lg border border-gray-100 p-6">
               <h3 className="text-lg font-semibold text-gray-900 mb-4 flex items-center">
                 <Globe className="h-5 w-5 mr-2 text-green-500" />
-                Your Farm's Aura (Satellite View)
+                {t.dashboard.farmAura}
               </h3>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div className="space-y-4">
                   <div className="bg-gradient-to-r from-green-50 to-emerald-50 rounded-lg p-4">
-                    <h4 className="font-semibold text-green-800 mb-2">Health Indicators</h4>
+                    <h4 className="font-semibold text-green-800 mb-2">{t.dashboard.healthIndicators}</h4>
                     <div className="space-y-2">
                       <div className="flex justify-between text-sm">
-                        <span>Vegetation Index</span>
-                        <span className="font-medium text-green-600">0.82 (Excellent)</span>
+                        <span>{t.dashboard.vegetationIndex}</span>
+                        <span className="font-medium text-green-600">0.82 ({t.dashboard.excellent})</span>
                       </div>
                       <div className="flex justify-between text-sm">
-                        <span>Soil Moisture</span>
-                        <span className="font-medium text-blue-600">78% (Good)</span>
+                        <span>{t.dashboard.soilMoisture}</span>
+                        <span className="font-medium text-blue-600">78% ({t.dashboard.good})</span>
                       </div>
                       <div className="flex justify-between text-sm">
-                        <span>Crop Density</span>
-                        <span className="font-medium text-emerald-600">High</span>
+                        <span>{t.dashboard.cropDensity}</span>
+                        <span className="font-medium text-emerald-600">{t.dashboard.high}</span>
                       </div>
                     </div>
                   </div>
                   <div className="bg-gradient-to-r from-blue-50 to-cyan-50 rounded-lg p-4">
-                    <h4 className="font-semibold text-blue-800 mb-2">Improvement Tips</h4>
+                    <h4 className="font-semibold text-blue-800 mb-2">{t.dashboard.improvementTips}</h4>
                     <ul className="text-sm text-blue-700 space-y-1">
-                      <li>• Add organic mulch to boost soil health</li>
-                      <li>• Consider intercropping with legumes</li>
-                      <li>• Optimize irrigation timing</li>
+                      <li>• {t.improvementTips.addOrganicMulch}</li>
+                      <li>• {t.improvementTips.considerIntercropping}</li>
+                      <li>• {t.improvementTips.optimizeIrrigation}</li>
                     </ul>
                   </div>
                 </div>
@@ -520,8 +522,8 @@ function App({ onLoginClick, userName, userLocation }: AppProps) {
                     <div className={`w-32 h-32 bg-gradient-to-r ${getAuraColor(farmer.auraHealth)} rounded-full mx-auto mb-4 flex items-center justify-center shadow-lg`}>
                       <TreePine className="h-16 w-16 text-white" />
                     </div>
-                    <p className="text-lg font-semibold text-gray-800">Farm Aura: {farmer.auraHealth}%</p>
-                    <p className="text-sm text-gray-600">Last updated: 2 hours ago</p>
+                    <p className="text-lg font-semibold text-gray-800">{t.dashboard.farmAura}: {farmer.auraHealth}%</p>
+                    <p className="text-sm text-gray-600">{t.dashboard.lastUpdated}: 2 hours ago</p>
                   </div>
                 </div>
               </div>
@@ -531,7 +533,7 @@ function App({ onLoginClick, userName, userLocation }: AppProps) {
             <div className="bg-white rounded-xl shadow-lg border border-gray-100 p-6">
               <h3 className="text-lg font-semibold text-gray-900 mb-4 flex items-center">
                 <Award className="h-5 w-5 mr-2 text-yellow-500" />
-                Recent Achievements & Titles
+                {t.dashboard.recentAchievements}
               </h3>
               <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                 {farmer.badges.map((badge, index) => (
@@ -557,8 +559,8 @@ function App({ onLoginClick, userName, userLocation }: AppProps) {
               <div className="flex items-center space-x-4">
                 <div className="text-4xl">{guild.logo}</div>
                 <div className="text-right">
-                  <p className="text-lg font-semibold text-gray-900">Level {guild.level}</p>
-                  <p className="text-sm text-gray-600">{guild.members} members</p>
+                  <p className="text-lg font-semibold text-gray-900">{t.guild.level} {guild.level}</p>
+                  <p className="text-sm text-gray-600">{guild.members} {t.guild.members}</p>
                 </div>
               </div>
             </div>
@@ -566,9 +568,9 @@ function App({ onLoginClick, userName, userLocation }: AppProps) {
             {/* Guild Challenge */}
             <div className="bg-gradient-to-r from-purple-500 to-indigo-600 rounded-xl shadow-lg text-white p-6">
               <div className="flex items-center justify-between mb-4">
-                <h3 className="text-xl font-bold">Current Guild Challenge</h3>
+                <h3 className="text-xl font-bold">{t.guild.currentGuildChallenge}</h3>
                 <div className="bg-white bg-opacity-20 px-3 py-1 rounded-full text-sm">
-                  Rank #{guild.rank}
+                  {t.guild.rank} #{guild.rank}
                 </div>
               </div>
               <h4 className="text-lg font-semibold mb-2">{guild.currentChallenge}</h4>
@@ -588,7 +590,7 @@ function App({ onLoginClick, userName, userLocation }: AppProps) {
                 </div>
                 <div className="text-right">
                   <p className="text-2xl font-bold">{guild.progress}%</p>
-                  <p className="text-xs text-purple-200">Complete</p>
+                  <p className="text-xs text-purple-200">{t.dashboard.complete}</p>
                 </div>
               </div>
             </div>
@@ -598,28 +600,28 @@ function App({ onLoginClick, userName, userLocation }: AppProps) {
               <div className="bg-white rounded-xl shadow-lg border border-gray-100 p-6">
                 <div className="flex items-center space-x-3 mb-4">
                   <Users className="h-6 w-6 text-blue-600" />
-                  <h3 className="font-semibold text-gray-900">Active Members</h3>
+                  <h3 className="font-semibold text-gray-900">{t.guild.activeMembers}</h3>
                 </div>
                 <div className="text-3xl font-bold text-blue-600 mb-2">{guild.members}</div>
-                <p className="text-sm text-gray-600">Farmers united</p>
+                <p className="text-sm text-gray-600">{t.guild.farmersUnited}</p>
               </div>
 
               <div className="bg-white rounded-xl shadow-lg border border-gray-100 p-6">
                 <div className="flex items-center space-x-3 mb-4">
                   <Trophy className="h-6 w-6 text-yellow-600" />
-                  <h3 className="font-semibold text-gray-900">Guild Level</h3>
+                  <h3 className="font-semibold text-gray-900">{t.guild.guildLevel}</h3>
                 </div>
                 <div className="text-3xl font-bold text-yellow-600 mb-2">{guild.level}</div>
-                <p className="text-sm text-gray-600">Collective achievements</p>
+                <p className="text-sm text-gray-600">{t.guild.collectiveAchievements}</p>
               </div>
 
               <div className="bg-white rounded-xl shadow-lg border border-gray-100 p-6">
                 <div className="flex items-center space-x-3 mb-4">
                   <Target className="h-6 w-6 text-green-600" />
-                  <h3 className="font-semibold text-gray-900">Challenges Won</h3>
+                  <h3 className="font-semibold text-gray-900">{t.guild.challengesWon}</h3>
                 </div>
                 <div className="text-3xl font-bold text-green-600 mb-2">12</div>
-                <p className="text-sm text-gray-600">This season</p>
+                <p className="text-sm text-gray-600">{t.guild.thisSeason}</p>
               </div>
             </div>
 
@@ -627,7 +629,7 @@ function App({ onLoginClick, userName, userLocation }: AppProps) {
             <div className="bg-white rounded-xl shadow-lg border border-gray-100 p-6">
               <h3 className="text-lg font-semibold text-gray-900 mb-4 flex items-center">
                 <MessageCircle className="h-5 w-5 mr-2 text-blue-500" />
-                Guild Chat
+                {t.guild.guildChat}
               </h3>
               <div className="space-y-3 mb-4">
                 {[
@@ -650,7 +652,7 @@ function App({ onLoginClick, userName, userLocation }: AppProps) {
                 ))}
               </div>
               <button className="w-full bg-purple-600 text-white py-2 rounded-lg font-medium hover:bg-purple-700 transition-colors">
-                Open Guild Chat
+                {t.guild.openGuildChat}
               </button>
             </div>
           </div>
@@ -659,10 +661,10 @@ function App({ onLoginClick, userName, userLocation }: AppProps) {
         {activeTab === 'quests' && (
   <div className="space-y-6">
     <div className="flex items-center justify-between">
-      <h2 className="text-2xl font-bold text-gray-900">My Quests</h2>
+      <h2 className="text-2xl font-bold text-gray-900">{t.quests.myQuests}</h2>
       <div className="flex items-center space-x-2 text-sm text-gray-600">
         <Calendar className="h-4 w-4" />
-        <span>Updated daily</span>
+        <span>{t.quests.updatedDaily}</span>
       </div>
     </div>
 
@@ -681,10 +683,10 @@ function App({ onLoginClick, userName, userLocation }: AppProps) {
               <div className="flex items-center space-x-3 mb-2">
                 <h3 className="text-lg font-semibold text-gray-900">{quest.title}</h3>
                 <span className={`px-2 py-1 rounded-full text-xs font-medium ${getDifficultyColor(quest.difficulty)}`}>
-                  {quest.difficulty}
+                  {quest.difficulty === 'Easy' ? t.quests.easy : quest.difficulty === 'Medium' ? t.quests.medium : t.quests.hard}
                 </span>
                 <span className={`px-2 py-1 rounded-full text-xs font-medium ${getQuestTypeColor(quest.type)}`}>
-                  {quest.type === 'boss' ? '👹 Boss' : quest.type === 'guild' ? '🛡️ Guild' : '👤 Solo'}
+                  {quest.type === 'boss' ? `👹 ${t.quests.boss}` : quest.type === 'guild' ? `🛡️ ${t.quests.guild}` : `👤 ${t.quests.individual}`}
                 </span>
                 {quest.completed && (
                   <CheckCircle className="h-5 w-5 text-green-500" />
@@ -699,11 +701,11 @@ function App({ onLoginClick, userName, userLocation }: AppProps) {
                 </div>
                 <div className="flex items-center space-x-1">
                   <Star className="h-4 w-4" />
-                  <span>{quest.points} points</span>
+                  <span>{quest.points} {t.quests.points}</span>
                 </div>
                 <div className="flex items-center space-x-1">
                   <Calendar className="h-4 w-4" />
-                  <span>Due: {quest.deadline}</span>
+                  <span>{t.quests.due}: {quest.deadline}</span>
                 </div>
                 {quest.reward && (
                   <div className="flex items-center space-x-1">
@@ -736,10 +738,10 @@ function App({ onLoginClick, userName, userLocation }: AppProps) {
             <div className="flex items-center justify-between">
               <h2 className="text-2xl font-bold text-gray-900 flex items-center">
                 <Gift className="h-8 w-8 mr-3 text-yellow-600" />
-                Green Credits Mandi
+                {t.marketplace.greenCreditsMandi}
               </h2>
               <div className="bg-yellow-100 text-yellow-800 px-4 py-2 rounded-lg font-semibold">
-                {farmer.greenCredits} Credits Available
+                {farmer.greenCredits} {t.marketplace.creditsAvailable}
               </div>
             </div>
 
@@ -749,7 +751,7 @@ function App({ onLoginClick, userName, userLocation }: AppProps) {
               <div className="bg-white rounded-xl shadow-lg border border-gray-100 p-6">
                 <h3 className="text-lg font-semibold text-gray-900 mb-4 flex items-center">
                   <Coins className="h-5 w-5 mr-2 text-green-600" />
-                  Real-World Benefits
+                  {t.marketplace.realWorldBenefits}
                 </h3>
                 <div className="space-y-3">
                   {[
@@ -766,7 +768,7 @@ function App({ onLoginClick, userName, userLocation }: AppProps) {
                       </div>
                       <p className="text-sm text-gray-600">{benefit.description}</p>
                       <button className="mt-2 w-full bg-green-600 text-white py-1 rounded text-sm hover:bg-green-700 transition-colors">
-                        Redeem
+                        {t.marketplace.redeem}
                       </button>
                     </div>
                   ))}
@@ -777,7 +779,7 @@ function App({ onLoginClick, userName, userLocation }: AppProps) {
               <div className="bg-white rounded-xl shadow-lg border border-gray-100 p-6">
                 <h3 className="text-lg font-semibold text-gray-900 mb-4 flex items-center">
                   <Brain className="h-5 w-5 mr-2 text-purple-600" />
-                  Knowledge Unlocks
+                  {t.marketplace.knowledgeUnlocks}
                 </h3>
                 <div className="space-y-3">
                   {[
@@ -794,7 +796,7 @@ function App({ onLoginClick, userName, userLocation }: AppProps) {
                       </div>
                       <p className="text-sm text-gray-600">{knowledge.description}</p>
                       <button className="mt-2 w-full bg-purple-600 text-white py-1 rounded text-sm hover:bg-purple-700 transition-colors">
-                        Unlock
+                        {t.marketplace.unlock}
                       </button>
                     </div>
                   ))}
@@ -805,7 +807,7 @@ function App({ onLoginClick, userName, userLocation }: AppProps) {
               <div className="bg-white rounded-xl shadow-lg border border-gray-100 p-6">
                 <h3 className="text-lg font-semibold text-gray-900 mb-4 flex items-center">
                   <Star className="h-5 w-5 mr-2 text-yellow-600" />
-                  Virtual Rewards
+                  {t.marketplace.virtualRewards}
                 </h3>
                 <div className="space-y-3">
                   {[
@@ -822,7 +824,7 @@ function App({ onLoginClick, userName, userLocation }: AppProps) {
                       </div>
                       <p className="text-sm text-gray-600">{reward.description}</p>
                       <button className="mt-2 w-full bg-yellow-600 text-white py-1 rounded text-sm hover:bg-yellow-700 transition-colors">
-                        Purchase
+                        {t.marketplace.purchase}
                       </button>
                     </div>
                   ))}
@@ -834,14 +836,14 @@ function App({ onLoginClick, userName, userLocation }: AppProps) {
             <div className="bg-white rounded-xl shadow-lg border border-gray-100 p-6">
               <h3 className="text-lg font-semibold text-gray-900 mb-4 flex items-center">
                 <CheckCircle className="h-5 w-5 mr-2 text-blue-600" />
-                Government Scheme Eligibility
+                {t.marketplace.governmentSchemeEligibility}
               </h3>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 {[
-                  { scheme: 'Solar Pump Subsidy', progress: 85, requirement: 'Sustainability Score: 80+', status: 'Almost Eligible' },
-                  { scheme: 'Organic Certification Support', progress: 92, requirement: 'Organic Practices: 90%+', status: 'Eligible' },
-                  { scheme: 'Drip Irrigation Subsidy', progress: 67, requirement: 'Water Conservation Score: 70+', status: 'In Progress' },
-                  { scheme: 'Crop Insurance Premium Reduction', progress: 78, requirement: 'Risk Management Score: 75+', status: 'Eligible' }
+                  { scheme: t.marketplace.solarPumpSubsidy, progress: 85, requirement: 'Sustainability Score: 80+', status: t.marketplace.almostEligible },
+                  { scheme: t.marketplace.organicCertificationSupport, progress: 92, requirement: 'Organic Practices: 90%+', status: t.marketplace.eligible },
+                  { scheme: t.marketplace.dripIrrigationSubsidy, progress: 67, requirement: 'Water Conservation Score: 70+', status: t.marketplace.inProgress },
+                  { scheme: t.marketplace.cropInsurancePremiumReduction, progress: 78, requirement: 'Risk Management Score: 75+', status: t.marketplace.eligible }
                 ].map((scheme, index) => (
                   <div key={index} className="border border-gray-200 rounded-lg p-4">
                     <div className="flex justify-between items-start mb-2">
@@ -877,10 +879,10 @@ function App({ onLoginClick, userName, userLocation }: AppProps) {
         {activeTab === 'leaderboard' && (
           <div className="space-y-6">
             <div className="flex items-center justify-between">
-              <h2 className="text-2xl font-bold text-gray-900">Adarsh Kisan Leaderboard</h2>
+              <h2 className="text-2xl font-bold text-gray-900">{t.leaderboard.adarshKisanLeaderboard}</h2>
               <div className="flex items-center space-x-2 text-sm text-gray-600">
                 <MapPin className="h-4 w-4" />
-                <span>Maharashtra Region</span>
+                <span>{t.leaderboard.maharashtraRegion}</span>
               </div>
             </div>
 
@@ -891,8 +893,8 @@ function App({ onLoginClick, userName, userLocation }: AppProps) {
                     <Crown className="h-6 w-6 text-white" />
                   </div>
                   <div>
-                    <h3 className="text-lg font-semibold text-gray-900">Adarsh Kisan Challenge</h3>
-                    <p className="text-gray-600">Compete for the title of Model Farmer in your region</p>
+                    <h3 className="text-lg font-semibold text-gray-900">{t.leaderboard.adarshKisanChallenge}</h3>
+                    <p className="text-gray-600">{t.leaderboard.modelFarmerTitle}</p>
                   </div>
                 </div>
               </div>
@@ -929,7 +931,7 @@ function App({ onLoginClick, userName, userLocation }: AppProps) {
                         )}
                         {entry.name === farmer.name && (
                           <span className="bg-green-100 text-green-800 px-2 py-1 rounded-full text-xs font-medium">
-                            You
+                            {t.leaderboard.you}
                           </span>
                         )}
                       </div>
@@ -940,7 +942,7 @@ function App({ onLoginClick, userName, userLocation }: AppProps) {
                     </div>
                     <div className="text-right">
                       <div className="text-xl font-bold text-green-600">{entry.score}</div>
-                      <div className="text-sm text-gray-500">points</div>
+                      <div className="text-sm text-gray-500">{t.quests.points}</div>
                     </div>
                     <ChevronRight className="h-5 w-5 text-gray-400" />
                   </div>
@@ -952,7 +954,7 @@ function App({ onLoginClick, userName, userLocation }: AppProps) {
             <div className="bg-white rounded-xl shadow-lg border border-gray-100 p-6">
               <h3 className="text-lg font-semibold text-gray-900 mb-4 flex items-center">
                 <Shield className="h-5 w-5 mr-2 text-purple-500" />
-                Panchayat League - Guild Rankings
+                {t.leaderboard.panchayatLeague}
               </h3>
               <div className="space-y-3">
                 {[
@@ -971,15 +973,15 @@ function App({ onLoginClick, userName, userLocation }: AppProps) {
                         <h4 className="font-semibold text-gray-900">{guild.name}</h4>
                         {guild.name === farmer.guild && (
                           <span className="bg-purple-100 text-purple-800 px-2 py-1 rounded-full text-xs font-medium">
-                            Your Guild
+                            {t.leaderboard.yourGuild}
                           </span>
                         )}
                       </div>
-                      <p className="text-sm text-gray-600">{guild.members} members</p>
+                      <p className="text-sm text-gray-600">{guild.members} {t.guild.members}</p>
                     </div>
                     <div className="text-right">
                       <div className="text-lg font-bold text-purple-600">{guild.score}</div>
-                      <div className="text-sm text-gray-500">guild points</div>
+                      <div className="text-sm text-gray-500">{t.leaderboard.guildPoints}</div>
                     </div>
                   </div>
                 ))}
@@ -991,9 +993,9 @@ function App({ onLoginClick, userName, userLocation }: AppProps) {
         {activeTab === 'community' && (
           <div className="space-y-6">
             <div className="flex items-center justify-between">
-              <h2 className="text-2xl font-bold text-gray-900">Knowledge Bartering Hub</h2>
+              <h2 className="text-2xl font-bold text-gray-900">{t.community.knowledgeBarteting}</h2>
               <button className="bg-green-600 text-white px-4 py-2 rounded-lg font-medium hover:bg-green-700 transition-colors">
-                Ask for Help
+                {t.community.askForHelp}
               </button>
             </div>
 
@@ -1001,35 +1003,35 @@ function App({ onLoginClick, userName, userLocation }: AppProps) {
             <div className="bg-white rounded-xl shadow-lg border border-gray-100 p-6">
               <h3 className="text-lg font-semibold text-gray-900 mb-4 flex items-center">
                 <Brain className="h-5 w-5 mr-2 text-blue-500" />
-                Active Help Requests
+                {t.community.activeHelpRequests}
               </h3>
               <div className="space-y-4">
                 {[
                   { 
                     farmer: 'Priya Sharma', 
-                    problem: 'White flies attacking my tomato crop', 
+                    problem: t.helpRequests.whiteFliesAttack,
                     location: 'Aurangabad',
                     bids: 3,
                     reward: '50 Guru Points',
-                    time: '2 hours ago',
+                    time: `2 ${t.helpRequests.hoursAgo}`,
                     image: '🍅'
                   },
                   { 
                     farmer: 'Mohan Singh', 
-                    problem: 'Soil pH too alkaline, need organic solutions', 
+                    problem: t.helpRequests.soilPHAlkaline,
                     location: 'Nashik',
                     bids: 7,
                     reward: '75 Guru Points',
-                    time: '5 hours ago',
+                    time: `5 ${t.helpRequests.hoursAgo}`,
                     image: '🌱'
                   },
                   { 
                     farmer: 'Sunita Devi', 
-                    problem: 'Best intercropping options for sugarcane', 
+                    problem: t.helpRequests.intercroppingSugarcane,
                     location: 'Kolhapur',
                     bids: 2,
                     reward: '60 Guru Points',
-                    time: '1 day ago',
+                    time: `1 ${t.helpRequests.dayAgo}`,
                     image: '🎋'
                   }
                 ].map((request, index) => (
@@ -1045,13 +1047,13 @@ function App({ onLoginClick, userName, userLocation }: AppProps) {
                         <p className="text-gray-700 mb-3">{request.problem}</p>
                         <div className="flex items-center justify-between">
                           <div className="flex items-center space-x-4 text-sm text-gray-600">
-                            <span>{request.bids} solutions offered</span>
+                            <span>{request.bids} {t.community.solutionsOffered}</span>
                             <span className="bg-yellow-100 text-yellow-800 px-2 py-1 rounded-full font-medium">
                               {request.reward}
                             </span>
                           </div>
                           <button className="bg-blue-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-blue-700 transition-colors">
-                            Offer Solution
+                            {t.community.offerSolution}
                           </button>
                         </div>
                       </div>
@@ -1065,7 +1067,7 @@ function App({ onLoginClick, userName, userLocation }: AppProps) {
             <div className="bg-white rounded-xl shadow-lg border border-gray-100 p-6">
               <h3 className="text-lg font-semibold text-gray-900 mb-4 flex items-center">
                 <Award className="h-5 w-5 mr-2 text-yellow-500" />
-                Top Knowledge Gurus
+                {t.community.topKnowledgeGurus}
               </h3>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                 {[
@@ -1080,8 +1082,8 @@ function App({ onLoginClick, userName, userLocation }: AppProps) {
                     <h4 className="font-semibold text-gray-900 mb-1">{guru.name}</h4>
                     <p className="text-sm text-gray-600 mb-2">{guru.specialty}</p>
                     <div className="flex justify-center space-x-4 text-xs text-gray-500">
-                      <span>{guru.guruPoints} Guru Points</span>
-                      <span>{guru.solutions} Solutions</span>
+                      <span>{guru.guruPoints} {t.community.guruPoints}</span>
+                      <span>{guru.solutions} {t.community.solutions}</span>
                     </div>
                   </div>
                 ))}
@@ -1092,24 +1094,24 @@ function App({ onLoginClick, userName, userLocation }: AppProps) {
             <div className="bg-white rounded-xl shadow-lg border border-gray-100 p-6">
               <h3 className="text-lg font-semibold text-gray-900 mb-4 flex items-center">
                 <TrendingUp className="h-5 w-5 mr-2 text-green-500" />
-                Community Impact - Dharti Rakshak Movement
+                {t.community.communityImpact}
               </h3>
               <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
                 <div className="text-center p-4 bg-green-50 rounded-lg">
                   <div className="text-3xl font-bold text-green-600">1,247</div>
-                  <p className="text-sm text-gray-600 mt-1">Acres converted to sustainable farming</p>
+                  <p className="text-sm text-gray-600 mt-1">{t.community.acresConverted}</p>
                 </div>
                 <div className="text-center p-4 bg-blue-50 rounded-lg">
                   <div className="text-3xl font-bold text-blue-600">89%</div>
-                  <p className="text-sm text-gray-600 mt-1">Reduction in chemical usage</p>
+                  <p className="text-sm text-gray-600 mt-1">{t.community.reductionChemicalUsage}</p>
                 </div>
                 <div className="text-center p-4 bg-purple-50 rounded-lg">
                   <div className="text-3xl font-bold text-purple-600">324</div>
-                  <p className="text-sm text-gray-600 mt-1">Active Dharti Rakshaks</p>
+                  <p className="text-sm text-gray-600 mt-1">{t.community.activeDhartiRakshaks}</p>
                 </div>
                 <div className="text-center p-4 bg-yellow-50 rounded-lg">
                   <div className="text-3xl font-bold text-yellow-600">156</div>
-                  <p className="text-sm text-gray-600 mt-1">Boss battles won</p>
+                  <p className="text-sm text-gray-600 mt-1">{t.community.bossBattlesWon}</p>
                 </div>
               </div>
             </div>

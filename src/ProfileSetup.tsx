@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
 import { Leaf, User, MapPin, Save } from 'lucide-react';
+import { useLanguage } from './LanguageContext';
 
 interface ProfileSetupProps {
   onProfileComplete: (name: string, location: string) => void;
 }
 
 const ProfileSetup: React.FC<ProfileSetupProps> = ({ onProfileComplete }) => {
+  const { t } = useLanguage();
   const [name, setName] = useState('');
   const [location, setLocation] = useState('');
 
@@ -23,18 +25,18 @@ const ProfileSetup: React.FC<ProfileSetupProps> = ({ onProfileComplete }) => {
             <Leaf className="h-8 w-8 text-white" />
           </div>
           <div>
-            <h1 className="text-xl font-bold text-gray-900">AgriGame</h1>
-            <p className="text-sm text-gray-600">Dharti Rakshak Platform</p>
+            <h1 className="text-xl font-bold text-gray-900">{t.header.appName}</h1>
+            <p className="text-sm text-gray-600">{t.header.subtitle}</p>
           </div>
         </div>
-        <h2 className="text-2xl font-bold text-center text-gray-900">Complete Your Profile</h2>
+        <h2 className="text-2xl font-bold text-center text-gray-900">{t.profile.completeProfile}</h2>
         <p className="text-center text-gray-600">
-          Just a couple more details to get started on your journey.
+          {t.profile.profileSubtitle}
         </p>
 
         <div className="space-y-4">
           <div>
-            <label htmlFor="name" className="sr-only">Full Name</label>
+            <label htmlFor="name" className="sr-only">{t.profile.fullName}</label>
             <div className="relative rounded-lg shadow-sm">
               <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                 <User className="h-5 w-5 text-gray-400" aria-hidden="true" />
@@ -48,12 +50,12 @@ const ProfileSetup: React.FC<ProfileSetupProps> = ({ onProfileComplete }) => {
                 value={name}
                 onChange={(e) => setName(e.target.value)}
                 className="block w-full pl-10 pr-3 py-3 border border-gray-300 rounded-lg placeholder-gray-400 focus:outline-none focus:ring-green-500 focus:border-green-500 sm:text-sm"
-                placeholder="Enter your full name"
+                placeholder={t.profile.enterName}
               />
             </div>
           </div>
           <div>
-            <label htmlFor="location" className="sr-only">Location</label>
+            <label htmlFor="location" className="sr-only">{t.profile.location}</label>
             <div className="relative rounded-lg shadow-sm">
               <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                 <MapPin className="h-5 w-5 text-gray-400" aria-hidden="true" />
@@ -67,7 +69,7 @@ const ProfileSetup: React.FC<ProfileSetupProps> = ({ onProfileComplete }) => {
                 value={location}
                 onChange={(e) => setLocation(e.target.value)}
                 className="block w-full pl-10 pr-3 py-3 border border-gray-300 rounded-lg placeholder-gray-400 focus:outline-none focus:ring-green-500 focus:border-green-500 sm:text-sm"
-                placeholder="e.g., Satara, Maharashtra"
+                placeholder={t.profile.enterLocation}
               />
             </div>
           </div>
@@ -78,7 +80,7 @@ const ProfileSetup: React.FC<ProfileSetupProps> = ({ onProfileComplete }) => {
             className="w-full flex justify-center py-3 px-4 border border-transparent rounded-lg shadow-sm text-sm font-medium text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 disabled:opacity-50 disabled:cursor-not-allowed"
           >
             <Save className="h-5 w-5 mr-2" />
-            Save Profile
+            {t.profile.saveProfile}
           </button>
         </div>
       </div>
