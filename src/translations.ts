@@ -202,6 +202,19 @@ export interface Translations {
     };
     hoursAgo: string;
     dayAgo: string;
+    farmerNames: {
+      farmer1: string;
+      farmer2: string;
+      farmer3: string;
+      farmer4: string;
+      farmer5: string;
+      farmer6: string;
+    };
+    locations: {
+      aurangabad: string;
+      nashik: string;
+      kolhapur: string;
+    };
   };
 
   // Marketplace
@@ -502,6 +515,19 @@ export const translations: Record<Language, Translations> = {
       },
       hoursAgo: 'hours ago',
       dayAgo: 'day ago',
+      farmerNames: {
+        farmer1: 'Priya Sharma',
+        farmer2: 'Mohan Singh',
+        farmer3: 'Sunita Devi',
+        farmer4: 'Dr. Ramesh Patil',
+        farmer5: 'Kavita Deshmukh',
+        farmer6: 'Suresh Kumar',
+      },
+      locations: {
+        aurangabad: 'Aurangabad',
+        nashik: 'Nashik',
+        kolhapur: 'Kolhapur',
+      },
     },
     marketplace: {
       greenCreditsMandi: 'Green Credits Mandi',
@@ -782,6 +808,19 @@ export const translations: Record<Language, Translations> = {
       },
       hoursAgo: 'గంటల క్రితం',
       dayAgo: 'రోజు క్రితం',
+      farmerNames: {
+        farmer1: 'ప్రియా శర్మ',
+        farmer2: 'మోహన్ సింగ్',
+        farmer3: 'సునీతా దేవి',
+        farmer4: 'డాక్టర్ రమేష్ పాటిల్',
+        farmer5: 'కవిత దేశ్ముఖ్',
+        farmer6: 'సురేష్ కుమార్',
+      },
+      locations: {
+        aurangabad: 'ఔరంగాబాద్',
+        nashik: 'నాసిక్',
+        kolhapur: 'కోల్హాపూర్',
+      },
     },
     marketplace: {
       greenCreditsMandi: 'గ్రీన్ క్రెడిట్‌ల మార్కెట్',
@@ -1062,6 +1101,19 @@ export const translations: Record<Language, Translations> = {
       },
       hoursAgo: 'घंटे पहले',
       dayAgo: 'दिन पहले',
+      farmerNames: {
+        farmer1: 'प्रिया शर्मा',
+        farmer2: 'मोहन सिंह',
+        farmer3: 'सुनीता देवी',
+        farmer4: 'डॉ. रमेश पाटिल',
+        farmer5: 'कविता देशमुख',
+        farmer6: 'सुरेश कुमार',
+      },
+      locations: {
+        aurangabad: 'औरंगाबाद',
+        nashik: 'नाशिक',
+        kolhapur: 'कोल्हापुर',
+      },
     },
     marketplace: {
       greenCreditsMandi: 'हरित क्रेडिट मंडी',

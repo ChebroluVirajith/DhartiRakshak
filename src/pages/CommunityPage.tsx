@@ -8,27 +8,27 @@ export default function CommunityPage() {
 
   const helpRequests = [
     { 
-      farmer: 'Priya Sharma', 
+      farmer: t.community.farmerNames.farmer1,
       problem: t.community.helpRequests.whiteFliesAttack,
-      location: 'Aurangabad',
+      location: t.community.locations.aurangabad,
       bids: 3,
       reward: `50 ${t.community.guruPoints}`,
       time: `2 ${t.community.hoursAgo}`,
       image: '劫'
     },
     { 
-      farmer: 'Mohan Singh', 
+      farmer: t.community.farmerNames.farmer2,
       problem: t.community.helpRequests.soilPHAlkaline,
-      location: 'Nashik',
+      location: t.community.locations.nashik,
       bids: 7,
       reward: `75 ${t.community.guruPoints}`,
       time: `5 ${t.community.hoursAgo}`,
       image: '験'
     },
     { 
-      farmer: 'Sunita Devi', 
+      farmer: t.community.farmerNames.farmer3,
       problem: t.community.helpRequests.intercroppingSugarcane,
-      location: 'Kolhapur',
+      location: t.community.locations.kolhapur,
       bids: 2,
       reward: `60 ${t.community.guruPoints}`,
       time: `1 ${t.community.dayAgo}`,
@@ -37,9 +37,9 @@ export default function CommunityPage() {
   ];
 
   const topGurus = [
-    { name: 'Dr. Ramesh Patil', guruPoints: 2450, solutions: 89, specialty: t.categories.organicPestControl },
-    { name: 'Kavita Deshmukh', guruPoints: 2100, solutions: 76, specialty: t.categories.soilManagement },
-    { name: 'Suresh Kumar', guruPoints: 1890, solutions: 65, specialty: t.categories.waterConservation }
+    { name: t.community.farmerNames.farmer4, guruPoints: 2450, solutions: 89, specialty: t.categories.organicPestControl },
+    { name: t.community.farmerNames.farmer5, guruPoints: 2100, solutions: 76, specialty: t.categories.soilManagement },
+    { name: t.community.farmerNames.farmer6, guruPoints: 1890, solutions: 65, specialty: t.categories.waterConservation }
   ];
 
   return (
