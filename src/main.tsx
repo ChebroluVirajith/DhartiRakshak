@@ -18,25 +18,37 @@ function Main() {
   // Load user data from local storage on initial mount
   useEffect(() => {
     const savedLanguage = getSavedLanguage();
-    if (savedLanguage) {
-      setSelectedLanguage(savedLanguage);
-    }
+    setSelectedLanguage(savedLanguage);
 
     const savedUser = localStorage.getItem('dhartiRakshakUser');
     if (savedUser) {
       const userData = JSON.parse(savedUser);
       setUserName(userData.name);
       setUserLocation(userData.location);
-      setSelectedLanguage(userData.language);
+      // Update language from user data if it exists
+      if (userData.language) {
+        setSelectedLanguage(userData.language as Language);
+        localStorage.setItem('dhartiRakshakLanguage', userData.language);
+      }
     }
   }, []);
   
   const handleLoginSuccess = (userData: UserData) => {
     setUserName(userData.name);
     setUserLocation(userData.location);
-    setSelectedLanguage(userData.language as Language);
-    localStorage.setItem('dhartiRakshakLanguage', userData.language);
-    localStorage.setItem('dhartiRakshakUser', JSON.stringify(userData));
+    
+    // Update language immediately
+    const newLanguage = userData.language as Language;
+    setSelectedLanguage(newLanguage);
+    localStorage.setItem('dhartiRakshakLanguage', newLanguage);
+    
+    // Save user data
+    const userDataToSave = {
+      ...userData,
+      language: newLanguage
+    };
+    localStorage.setItem('dhartiRakshakUser', JSON.stringify(userDataToSave));
+    
     setCurrentPage('app');
   };
 

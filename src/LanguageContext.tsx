@@ -20,6 +20,13 @@ export const LanguageProvider: React.FC<LanguageProviderProps> = ({
 }) => {
   const [currentLanguage, setCurrentLanguage] = useState<Language>(initialLanguage);
 
+  // Update language when initialLanguage changes
+  React.useEffect(() => {
+    if (initialLanguage !== currentLanguage) {
+      setCurrentLanguage(initialLanguage);
+    }
+  }, [initialLanguage]);
+
   const setLanguage = (language: Language) => {
     setCurrentLanguage(language);
     // Optional: Save to localStorage for persistence

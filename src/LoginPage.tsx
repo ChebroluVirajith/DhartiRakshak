@@ -253,6 +253,10 @@ joiningPlatform: 'ప్లాట్‌ఫామ్‌లో చేరుతు�
           location: farmerLocation,
           language: selectedLanguage
         };
+        
+        // Save language to localStorage immediately
+        localStorage.setItem('dhartiRakshakLanguage', selectedLanguage);
+        
         onLoginSuccess(userData);
       }, 2000);
     } catch (err: any) {
