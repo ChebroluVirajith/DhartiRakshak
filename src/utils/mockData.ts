@@ -10,10 +10,10 @@ export const defaultFarmer: Farmer = {
   level: 7,
   totalPoints: 2450,
   greenCredits: 340,
-  badges: ['Organic Pioneer', 'Water Saver', 'Soil Guardian', 'Bio Pest Controller'],
+  badges: ['organicPioneer', 'waterSaver', 'soilGuardian', 'bioPestController'],
   rank: 12,
   guild: 'Basmati Brigade',
-  title: 'Dharti Rakshak',
+  title: 'dhartiRakshak',
   auraHealth: 82,
   streakDays: 15
 };
@@ -24,7 +24,7 @@ export const guild: Guild = {
   logo: '🌾',
   members: 24,
   level: 5,
-  currentChallenge: 'Village-wide Drip Irrigation',
+  currentChallenge: 'villageDripSystemDesc',
   progress: 67,
   rank: 3
 };
@@ -32,59 +32,59 @@ export const guild: Guild = {
 export const bossChallenge: BossChallenge = {
   id: 'chemical-asur',
   name: 'Chemical Asur',
-  description: 'Unite to defeat excessive pesticide use in your region',
+  description: 'chemicalAsurDesc',
   icon: Bug,
   progress: 45,
   participants: 156,
-  reward: 'Pest-Master Badge + 500 Green Credits',
+  reward: 'asurSlayerBadge',
   timeLeft: '12 days'
 };
 
 export const quests: Quest[] = [
   {
     id: '1',
-    title: 'Switch to Bio-Pesticides',
-    description: 'Replace chemical pesticides with neem oil and organic alternatives for 3 weeks',
-    category: 'Pest Management',
+    title: 'switchToBioPesticides',
+    description: 'bioPesticidesDesc',
+    category: 'pestManagement',
     difficulty: 'Medium',
     points: 150,
     progress: 65,
     deadline: '2025-02-15',
     completed: false,
     type: 'individual',
-    reward: 'Pest-Buster Badge'
+    reward: 'pestBuster'
   },
   {
     id: '2',
-    title: 'Guild Challenge: Village Drip System',
-    description: 'Work with Basmati Brigade to install drip irrigation across 50 acres',
-    category: 'Water Management',
+    title: 'guildChallenge',
+    description: 'villageDripSystemDesc',
+    category: 'waterManagement',
     difficulty: 'Hard',
     points: 300,
     progress: 67,
     deadline: '2025-03-01',
     completed: false,
     type: 'guild',
-    reward: 'Water Guardian Title'
+    reward: 'waterGuardian'
   },
   {
     id: '3',
-    title: 'Defeat the Chemical Asur',
-    description: 'Join the community boss battle against excessive pesticide use',
-    category: 'Community Challenge',
+    title: 'defeatChemicalAsur',
+    description: 'chemicalAsurDesc',
+    category: 'communityChallenge',
     difficulty: 'Hard',
     points: 500,
     progress: 45,
     deadline: '2025-02-20',
     completed: false,
     type: 'boss',
-    reward: 'Asur Slayer Badge + 500 Credits'
+    reward: 'asurSlayer'
   },
   {
     id: '4',
-    title: 'Composting Challenge',
-    description: 'Create organic compost using farm waste and kitchen scraps',
-    category: 'Soil Health',
+    title: 'compostingChallenge',
+    description: 'compostingDesc',
+    category: 'soilHealth',
     difficulty: 'Easy',
     points: 100,
     progress: 100,
@@ -95,16 +95,16 @@ export const quests: Quest[] = [
 ];
 
 export const leaderboard: LeaderboardEntry[] = [
-  { name: 'Amit Patil', location: 'Pune', score: 3200, rank: 1, avatar: 'AP', title: 'Maha Dharti Rakshak', guild: 'Millet Mavericks' },
-  { name: 'Sunita Devi', location: 'Kolhapur', score: 2980, rank: 2, avatar: 'SD', title: 'Prakriti Sevak', guild: 'Green Guardians' },
-  { name: 'Mohan Singh', location: 'Nashik', score: 2750, rank: 3, avatar: 'MS', title: 'Jal Rakshak', guild: 'Water Warriors' },
-  { name: 'Priya Sharma', location: 'Aurangabad', score: 2650, rank: 4, avatar: 'PS', title: 'Bhoomi Mata', guild: 'Soil Sisters' },
-  { name: 'Rajesh Kumar', location: 'Satara', score: 2450, rank: 5, avatar: 'RK', title: 'Dharti Rakshak', guild: 'Basmati Brigade' }
+  { name: 'Amit Patil', location: 'Pune', score: 3200, rank: 1, avatar: 'AP', title: 'mahaDhartiRakshak', guild: 'Millet Mavericks' },
+  { name: 'Sunita Devi', location: 'Kolhapur', score: 2980, rank: 2, avatar: 'SD', title: 'prakritiSevak', guild: 'Green Guardians' },
+  { name: 'Mohan Singh', location: 'Nashik', score: 2750, rank: 3, avatar: 'MS', title: 'jalRakshak', guild: 'Water Warriors' },
+  { name: 'Priya Sharma', location: 'Aurangabad', score: 2650, rank: 4, avatar: 'PS', title: 'bhoomiMata', guild: 'Soil Sisters' },
+  { name: 'Rajesh Kumar', location: 'Satara', score: 2450, rank: 5, avatar: 'RK', title: 'dhartiRakshak', guild: 'Basmati Brigade' }
 ];
 
 export const dailyRiddle: DailyRiddle = {
-  question: "Which traditional companion plant helps repel aphids from tomatoes?",
+  question: "dailyRiddleQuestion",
   options: ["Marigold", "Mint", "Basil", "All of the above"],
   correct: 3,
-  reward: "25 Green Credits + Knowledge Keeper Badge"
+  reward: "knowledgeKeeperBadge"
 };

@@ -9,37 +9,37 @@ export default function CommunityPage() {
   const helpRequests = [
     { 
       farmer: 'Priya Sharma', 
-      problem: t.helpRequests.whiteFliesAttack,
+      problem: t.community.helpRequests.whiteFliesAttack,
       location: 'Aurangabad',
       bids: 3,
-      reward: '50 Guru Points',
-      time: `2 ${t.helpRequests.hoursAgo}`,
-      image: '🍅'
+      reward: `50 ${t.community.guruPoints}`,
+      time: `2 ${t.community.hoursAgo}`,
+      image: '劫'
     },
     { 
       farmer: 'Mohan Singh', 
-      problem: t.helpRequests.soilPHAlkaline,
+      problem: t.community.helpRequests.soilPHAlkaline,
       location: 'Nashik',
       bids: 7,
-      reward: '75 Guru Points',
-      time: `5 ${t.helpRequests.hoursAgo}`,
-      image: '🌱'
+      reward: `75 ${t.community.guruPoints}`,
+      time: `5 ${t.community.hoursAgo}`,
+      image: '験'
     },
     { 
       farmer: 'Sunita Devi', 
-      problem: t.helpRequests.intercroppingSugarcane,
+      problem: t.community.helpRequests.intercroppingSugarcane,
       location: 'Kolhapur',
       bids: 2,
-      reward: '60 Guru Points',
-      time: `1 ${t.helpRequests.dayAgo}`,
-      image: '🎋'
+      reward: `60 ${t.community.guruPoints}`,
+      time: `1 ${t.community.dayAgo}`,
+      image: '視'
     }
   ];
 
   const topGurus = [
-    { name: 'Dr. Ramesh Patil', guruPoints: 2450, solutions: 89, specialty: 'Organic Pest Control' },
-    { name: 'Kavita Deshmukh', guruPoints: 2100, solutions: 76, specialty: 'Soil Management' },
-    { name: 'Suresh Kumar', guruPoints: 1890, solutions: 65, specialty: 'Water Conservation' }
+    { name: 'Dr. Ramesh Patil', guruPoints: 2450, solutions: 89, specialty: t.categories.organicPestControl },
+    { name: 'Kavita Deshmukh', guruPoints: 2100, solutions: 76, specialty: t.categories.soilManagement },
+    { name: 'Suresh Kumar', guruPoints: 1890, solutions: 65, specialty: t.categories.waterConservation }
   ];
 
   return (
@@ -65,8 +65,8 @@ export default function CommunityPage() {
                 <div className="flex-1">
                   <div className="flex items-center space-x-2 mb-2">
                     <h4 className="font-semibold text-gray-900">{request.farmer}</h4>
-                    <span className="text-sm text-gray-500">• {request.location}</span>
-                    <span className="text-sm text-gray-500">• {request.time}</span>
+                    <span className="text-sm text-gray-500">窶｢ {request.location}</span>
+                    <span className="text-sm text-gray-500">窶｢ {request.time}</span>
                   </div>
                   <p className="text-gray-700 mb-3">{request.problem}</p>
                   <div className="flex items-center justify-between">

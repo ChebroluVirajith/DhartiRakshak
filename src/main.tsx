@@ -1,11 +1,11 @@
+// src/main.tsx
 import { StrictMode, useState, useEffect } from 'react';
 import { createRoot } from 'react-dom/client';
 import App from './App.tsx';
 import LoginPage from './LoginPage.tsx';
-import ProfileSetup from './ProfileSetup.tsx';
-import LanguageSelector from './LanguageSelector.tsx';
 import { LanguageProvider, getSavedLanguage } from './LanguageContext.tsx';
 import { Language } from './translations.ts';
+import { UserData } from './LoginPage.tsx';
 import './index.css';
 
 
@@ -14,63 +14,48 @@ function Main() {
   const [userName, setUserName] = useState('');
   const [userLocation, setUserLocation] = useState('');
   const [selectedLanguage, setSelectedLanguage] = useState<Language>('en');
-  const [isLanguageSelected, setIsLanguageSelected] = useState(false);
 
-  // Check for saved language on app start
+  // Load user data from local storage on initial mount
   useEffect(() => {
     const savedLanguage = getSavedLanguage();
-    if (savedLanguage && savedLanguage !== 'en') {
+    if (savedLanguage) {
       setSelectedLanguage(savedLanguage);
-      setIsLanguageSelected(true);
-    } else {
-      // For new users, we'll show language selector after login
-      setIsLanguageSelected(true); // Set to true for existing functionality, false for new users
+    }
+
+    const savedUser = localStorage.getItem('dhartiRakshakUser');
+    if (savedUser) {
+      const userData = JSON.parse(savedUser);
+      setUserName(userData.name);
+      setUserLocation(userData.location);
+      setSelectedLanguage(userData.language);
     }
   }, []);
-
-  const handleLanguageSelect = (language: Language) => {
-    setSelectedLanguage(language);
-    setIsLanguageSelected(true);
-    localStorage.setItem('dhartiRakshakLanguage', language);
-  };
-
-  const handleLoginSuccess = () => {
-    // After successful OTP verification, check if language was already selected
-    const savedLanguage = getSavedLanguage();
-    if (!savedLanguage || savedLanguage === 'en') {
-      setCurrentPage('language'); // Show language selector
-    } else {
-      setCurrentPage('profile'); // Skip to profile setup
-    }
-  };
-
-  const handleLanguageSelected = (language: Language) => {
-    handleLanguageSelect(language);
-    setCurrentPage('profile'); // Go to profile setup after language selection
-  };
-
-  const handleProfileComplete = (name: string, location: string) => {
-    setUserName(name);
-    setUserLocation(location);
+  
+  const handleLoginSuccess = (userData: UserData) => {
+    setUserName(userData.name);
+    setUserLocation(userData.location);
+    setSelectedLanguage(userData.language as Language);
+    localStorage.setItem('dhartiRakshakLanguage', userData.language);
+    localStorage.setItem('dhartiRakshakUser', JSON.stringify(userData));
     setCurrentPage('app');
   };
 
   const renderContent = () => {
-    if (!isLanguageSelected && currentPage !== 'language') {
-      // This shouldn't happen in normal flow, but safety check
-      return <LanguageSelector onLanguageSelect={handleLanguageSelect} />;
-    }
+    // Check if the user is logged in
+    const isLoggedIn = userName !== '';
 
     switch (currentPage) {
       case 'login':
         return <LoginPage onBack={() => setCurrentPage('app')} onLoginSuccess={handleLoginSuccess} />;
-      case 'language':
-        return <LanguageSelector onLanguageSelect={handleLanguageSelected} />;
-      case 'profile':
-        return <ProfileSetup onProfileComplete={handleProfileComplete} />;
       case 'app':
       default:
-        return <App onLoginClick={() => setCurrentPage('login')} userName={userName} userLocation={userLocation} />;
+        // Render the app if logged in, otherwise show the login screen.
+        // This is where the flow is managed.
+        if (isLoggedIn) {
+          return <App onLoginClick={() => setCurrentPage('login')} userName={userName} userLocation={userLocation} />;
+        } else {
+          return <LoginPage onBack={() => setCurrentPage('app')} onLoginSuccess={handleLoginSuccess} />;
+        }
     }
   };
 

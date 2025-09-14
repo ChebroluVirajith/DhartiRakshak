@@ -1,4 +1,3 @@
-
 import { 
   Calendar, Target, Star, CheckCircle, Gift 
 } from 'lucide-react';
@@ -36,7 +35,7 @@ export default function QuestsPage({ quests }: QuestsPageProps) {
             <div className="flex items-start justify-between">
               <div className="flex-1">
                 <div className="flex items-center space-x-3 mb-2">
-                  <h3 className="text-lg font-semibold text-gray-900">{quest.title}</h3>
+                  <h3 className="text-lg font-semibold text-gray-900">{t.quests.titles[quest.id as keyof typeof t.quests.titles]}</h3>
                   <span className={`px-2 py-1 rounded-full text-xs font-medium ${getDifficultyColor(quest.difficulty)}`}>
                     {quest.difficulty === 'Easy' ? t.quests.easy : quest.difficulty === 'Medium' ? t.quests.medium : t.quests.hard}
                   </span>
@@ -47,12 +46,12 @@ export default function QuestsPage({ quests }: QuestsPageProps) {
                     <CheckCircle className="h-5 w-5 text-green-500" />
                   )}
                 </div>
-                <p className="text-gray-600 mb-4">{quest.description}</p>
+                <p className="text-gray-600 mb-4">{t.questDescriptions[quest.description as keyof typeof t.questDescriptions]}</p>
                 
                 <div className="flex items-center space-x-6 text-sm text-gray-500">
                   <div className="flex items-center space-x-1">
                     <Target className="h-4 w-4" />
-                    <span>{quest.category}</span>
+                    <span>{t.categories[quest.category as keyof typeof t.categories]}</span>
                   </div>
                   <div className="flex items-center space-x-1">
                     <Star className="h-4 w-4" />
@@ -65,7 +64,7 @@ export default function QuestsPage({ quests }: QuestsPageProps) {
                   {quest.reward && (
                     <div className="flex items-center space-x-1">
                       <Gift className="h-4 w-4" />
-                      <span>{quest.reward}</span>
+                      <span>{t.titles[quest.reward.replace(/ /g, '') as keyof typeof t.titles]}</span>
                     </div>
                   )}
                 </div>

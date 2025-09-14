@@ -1,4 +1,3 @@
-
 import { 
   Shield, Users, Trophy, Target, MessageCircle
 } from 'lucide-react';
@@ -36,12 +35,12 @@ export default function GuildPage({ guild }: GuildPageProps) {
             {t.guild.rank} #{guild.rank}
           </div>
         </div>
-        <h4 className="text-lg font-semibold mb-2">{guild.currentChallenge}</h4>
-        <p className="text-purple-100 mb-4">Work together to achieve 100% drip irrigation coverage in your village</p>
+        <h4 className="text-lg font-semibold mb-2">{t.questDescriptions.villageDripSystemDesc}</h4>
+        <p className="text-purple-100 mb-4">{guild.currentChallenge}</p>
         <div className="flex items-center justify-between">
           <div className="flex-1 mr-4">
             <div className="flex justify-between text-sm mb-1">
-              <span>Progress</span>
+              <span>{t.guild.progress}</span>
               <span>{guild.progress}%</span>
             </div>
             <div className="w-full bg-white bg-opacity-20 rounded-full h-3">
@@ -96,9 +95,9 @@ export default function GuildPage({ guild }: GuildPageProps) {
         </h3>
         <div className="space-y-3 mb-4">
           {[
-            { name: 'Amit', message: 'Just installed drip system on 2 acres! 💪', time: '2h ago' },
-            { name: 'Sunita', message: 'Great work! I can help with the next plot tomorrow', time: '1h ago' },
-            { name: 'Mohan', message: 'Sharing my neem oil recipe in the knowledge base', time: '30m ago' }
+            { name: 'Amit', message: t.guild.chatMessages.message1, time: t.guild.chatMessages.time1 },
+            { name: 'Sunita', message: t.guild.chatMessages.message2, time: t.guild.chatMessages.time2 },
+            { name: 'Mohan', message: t.guild.chatMessages.message3, time: t.guild.chatMessages.time3 }
           ].map((chat, index) => (
             <div key={index} className="flex items-start space-x-3 p-3 bg-gray-50 rounded-lg">
               <div className="w-8 h-8 bg-gradient-to-r from-purple-400 to-purple-600 rounded-full flex items-center justify-center text-white text-sm font-semibold">

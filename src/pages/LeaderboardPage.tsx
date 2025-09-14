@@ -1,4 +1,3 @@
-
 import { 
    Crown, Shield, MapPin, ChevronRight
 } from 'lucide-react';
@@ -14,10 +13,10 @@ export default function LeaderboardPage({ leaderboard, farmer }: LeaderboardPage
   const { t } = useLanguage();
 
   const guildRankings = [
-    { name: 'Millet Mavericks', members: 32, score: 15420, rank: 1, logo: '🌾' },
-    { name: 'Water Warriors', members: 28, score: 14850, rank: 2, logo: '💧' },
-    { name: 'Basmati Brigade', members: 24, score: 13200, rank: 3, logo: '🌾' },
-    { name: 'Green Guardians', members: 19, score: 12100, rank: 4, logo: '🌱' }
+    { name: t.leaderboard.guildRankings.milletMavericks, members: 32, score: 15420, rank: 1, logo: '🌾' },
+    { name: t.leaderboard.guildRankings.waterWarriors, members: 28, score: 14850, rank: 2, logo: '💧' },
+    { name: t.leaderboard.guildRankings.basmatiBrigade, members: 24, score: 13200, rank: 3, logo: '🍚' },
+    { name: t.leaderboard.guildRankings.greenGuardians, members: 19, score: 12100, rank: 4, logo: '🌲' }
   ];
 
   return (
@@ -66,7 +65,7 @@ export default function LeaderboardPage({ leaderboard, farmer }: LeaderboardPage
                 <div className="flex items-center space-x-2">
                   <h4 className="font-semibold text-gray-900">{entry.name}</h4>
                   <span className="bg-purple-100 text-purple-800 px-2 py-1 rounded-full text-xs font-medium">
-                    {entry.title}
+                    {t.titles[entry.title as keyof typeof t.titles] || entry.title}
                   </span>
                   {entry.guild && (
                     <span className="bg-blue-100 text-blue-800 px-2 py-1 rounded-full text-xs font-medium">

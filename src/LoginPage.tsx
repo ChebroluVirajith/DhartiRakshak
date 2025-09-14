@@ -3,16 +3,16 @@ import { ChevronLeft, Check, Lock, Leaf, Loader2, Globe, User, MapPin } from 'lu
 import { RecaptchaVerifier, signInWithPhoneNumber, ConfirmationResult } from 'firebase/auth';
 import { auth } from './firebase';
 
-interface LoginPageProps {
-  onBack: () => void;
-  onLoginSuccess: (userData: UserData) => void;
-}
-
-interface UserData {
+export interface UserData {
   phoneNumber: string;
   name: string;
   location: string;
   language: string;
+}
+
+interface LoginPageProps {
+  onBack: () => void;
+  onLoginSuccess: (userData: UserData) => void;
 }
 
 interface Language {

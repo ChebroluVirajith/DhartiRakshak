@@ -1,4 +1,3 @@
-
 import { 
   Sparkles, Globe, Crown, Coins, Award, TreePine, Bug 
 } from 'lucide-react';
@@ -13,7 +12,7 @@ interface DashboardPageProps {
   dailyRiddle: DailyRiddle;
 }
 
-export default function DashboardPage({ farmer, guild, bossChallenge, dailyRiddle }: DashboardPageProps) {
+export default function DashboardPage({ farmer, guild, bossChallenge, }: DashboardPageProps) {
   const { t } = useLanguage();
 
   return (
@@ -29,9 +28,9 @@ export default function DashboardPage({ farmer, guild, bossChallenge, dailyRiddl
             {t.dashboard.dailyChallenge}
           </div>
         </div>
-        <p className="text-indigo-100 mb-4">{dailyRiddle.question}</p>
+        <p className="text-indigo-100 mb-4">{t.dailyRiddle.question}</p>
         <div className="grid grid-cols-2 gap-2 mb-4">
-          {dailyRiddle.options.map((option, index) => (
+          {t.dailyRiddle.options.map((option, index) => (
             <button 
               key={index}
               className="bg-white bg-opacity-10 hover:bg-opacity-20 rounded-lg p-2 text-sm transition-colors"
@@ -40,7 +39,7 @@ export default function DashboardPage({ farmer, guild, bossChallenge, dailyRiddl
             </button>
           ))}
         </div>
-        <p className="text-xs text-indigo-200">Reward: {dailyRiddle.reward}</p>
+        <p className="text-xs text-indigo-200">{t.dashboard.reward}: {t.dailyRiddle.reward}</p>
       </div>
 
       {/* Boss Challenge Banner */}
@@ -51,8 +50,8 @@ export default function DashboardPage({ farmer, guild, bossChallenge, dailyRiddl
               <Bug className="h-8 w-8" />
             </div>
             <div>
-              <h3 className="text-xl font-bold">{t.dashboard.bossChallenge}: {bossChallenge.name}</h3>
-              <p className="text-red-100">{bossChallenge.description}</p>
+              <h3 className="text-xl font-bold">{t.dashboard.bossChallenge}: {t.bossChallenge.chemicalAsur}</h3>
+              <p className="text-red-100">{t.bossChallenge.chemicalAsurDesc}</p>
               <div className="flex items-center space-x-4 mt-2 text-sm">
                 <span>{bossChallenge.participants} {t.dashboard.farmersParticipating}</span>
                 <span>⏰ {bossChallenge.timeLeft} {t.dashboard.timeLeft}</span>
@@ -93,7 +92,7 @@ export default function DashboardPage({ farmer, guild, bossChallenge, dailyRiddl
               </div>
               <span className="text-sm font-medium text-gray-600">{farmer.auraHealth}%</span>
             </div>
-            <p className="text-xs text-gray-500 mt-1">Powered by satellite data</p>
+            <p className="text-xs text-gray-500 mt-1">{t.dashboard.poweredBySatelliteData}</p>
           </div>
         </div>
 
@@ -102,13 +101,13 @@ export default function DashboardPage({ farmer, guild, bossChallenge, dailyRiddl
             <div>
               <p className="text-sm font-medium text-gray-600">{t.dashboard.levelTitle}</p>
               <p className="text-2xl font-bold text-blue-600">{farmer.level}</p>
-              <p className="text-xs text-blue-600 font-medium">{farmer.title}</p>
+              <p className="text-xs text-blue-600 font-medium">{t.titles[farmer.title as keyof typeof t.titles]}</p>
             </div>
             <div className="bg-blue-100 p-3 rounded-lg">
               <Crown className="h-6 w-6 text-blue-600" />
             </div>
           </div>
-          <p className="text-sm text-gray-500 mt-2">{farmer.totalPoints} total points</p>
+          <p className="text-sm text-gray-500 mt-2">{farmer.totalPoints} {t.dashboard.totalPoints}</p>
         </div>
 
         <div className="bg-white rounded-xl shadow-lg border border-yellow-100 p-6">
@@ -121,7 +120,7 @@ export default function DashboardPage({ farmer, guild, bossChallenge, dailyRiddl
               <Coins className="h-6 w-6 text-yellow-600" />
             </div>
           </div>
-          <p className="text-sm text-gray-500 mt-2">Spend in Mandi</p>
+          <p className="text-sm text-gray-500 mt-2">{t.dashboard.spendInMandi}</p>
         </div>
 
         <div className="bg-white rounded-xl shadow-lg border border-purple-100 p-6">
@@ -196,7 +195,7 @@ export default function DashboardPage({ farmer, guild, bossChallenge, dailyRiddl
               <div className="w-12 h-12 bg-gradient-to-r from-yellow-400 to-orange-500 rounded-full mx-auto mb-2 flex items-center justify-center">
                 <Award className="h-6 w-6 text-white" />
               </div>
-              <p className="text-sm font-medium text-gray-900">{badge}</p>
+              <p className="text-sm font-medium text-gray-900">{t.titles[badge as keyof typeof t.titles]}</p>
             </div>
           ))}
         </div>

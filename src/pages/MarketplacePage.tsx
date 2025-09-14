@@ -1,4 +1,3 @@
-
 import { 
   Gift, Coins, Brain, Star, CheckCircle
 } from 'lucide-react';
@@ -13,28 +12,28 @@ export default function MarketplacePage({ farmer }: MarketplacePageProps) {
   const { t } = useLanguage();
 
   const realWorldBenefits = [
-    { item: 'Organic Fertilizer Discount', cost: 200, description: '20% off next purchase' },
-    { item: 'Seed Quality Upgrade', cost: 150, description: 'Premium seeds at regular price' },
-    { item: 'Loan Interest Reduction', cost: 500, description: '0.5% reduction for 6 months' }
+    { item: t.marketplace.organicFertilizerDiscount, cost: 200, description: t.marketplace.organicFertilizerDiscountDesc },
+    { item: t.marketplace.seedQualityUpgrade, cost: 150, description: t.marketplace.seedQualityUpgradeDesc },
+    { item: t.marketplace.loanInterestReduction, cost: 500, description: t.marketplace.loanInterestReductionDesc }
   ];
 
   const knowledgeUnlocks = [
-    { item: 'Advanced IPM Masterclass', cost: 100, description: 'Expert video series' },
-    { item: 'Soil Testing Guide', cost: 75, description: 'DIY testing methods' },
-    { item: 'Market Price Predictions', cost: 250, description: 'AI-powered insights' }
+    { item: t.marketplace.advancedIPMMasterclass, cost: 100, description: t.marketplace.advancedIPMMasterclassDesc },
+    { item: t.marketplace.soilTestingGuide, cost: 75, description: t.marketplace.soilTestingGuideDesc },
+    { item: t.marketplace.marketPricePredictions, cost: 250, description: t.marketplace.marketPricePredictionsDesc }
   ];
 
   const virtualRewards = [
-    { item: 'Premium Avatar Frame', cost: 50, description: 'Golden border for profile' },
-    { item: 'Farm Decoration Pack', cost: 75, description: 'Beautify your virtual farm' },
-    { item: 'Custom Guild Badge', cost: 125, description: 'Design your guild emblem' }
+    { item: t.marketplace.premiumAvatarFrame, cost: 50, description: t.marketplace.premiumAvatarFrameDesc },
+    { item: t.marketplace.farmDecorationPack, cost: 75, description: t.marketplace.farmDecorationPackDesc },
+    { item: t.marketplace.customGuildBadge, cost: 125, description: t.marketplace.customGuildBadgeDesc }
   ];
 
   const schemeEligibility = [
-    { scheme: t.marketplace.solarPumpSubsidy, progress: 85, requirement: 'Sustainability Score: 80+', status: t.marketplace.almostEligible },
-    { scheme: t.marketplace.organicCertificationSupport, progress: 92, requirement: 'Organic Practices: 90%+', status: t.marketplace.eligible },
-    { scheme: t.marketplace.dripIrrigationSubsidy, progress: 67, requirement: 'Water Conservation Score: 70+', status: t.marketplace.inProgress },
-    { scheme: t.marketplace.cropInsurancePremiumReduction, progress: 78, requirement: 'Risk Management Score: 75+', status: t.marketplace.eligible }
+    { scheme: t.marketplace.solarPumpSubsidy, progress: 85, requirement: t.marketplace.sustainabilityScoreReq, status: t.marketplace.almostEligible },
+    { scheme: t.marketplace.organicCertificationSupport, progress: 92, requirement: t.marketplace.organicPracticesReq, status: t.marketplace.eligible },
+    { scheme: t.marketplace.dripIrrigationSubsidy, progress: 67, requirement: t.marketplace.waterConservationScoreReq, status: t.marketplace.inProgress },
+    { scheme: t.marketplace.cropInsurancePremiumReduction, progress: 78, requirement: t.marketplace.riskManagementScoreReq, status: t.marketplace.eligible }
   ];
 
   return (
@@ -63,7 +62,7 @@ export default function MarketplacePage({ farmer }: MarketplacePageProps) {
                 <div className="flex justify-between items-start mb-2">
                   <h4 className="font-medium text-gray-900">{benefit.item}</h4>
                   <span className="bg-green-100 text-green-800 px-2 py-1 rounded text-xs font-medium">
-                    {benefit.cost} Credits
+                    {benefit.cost} {t.marketplace.credits}
                   </span>
                 </div>
                 <p className="text-sm text-gray-600">{benefit.description}</p>
@@ -87,7 +86,7 @@ export default function MarketplacePage({ farmer }: MarketplacePageProps) {
                 <div className="flex justify-between items-start mb-2">
                   <h4 className="font-medium text-gray-900">{knowledge.item}</h4>
                   <span className="bg-purple-100 text-purple-800 px-2 py-1 rounded text-xs font-medium">
-                    {knowledge.cost} Credits
+                    {knowledge.cost} {t.marketplace.credits}
                   </span>
                 </div>
                 <p className="text-sm text-gray-600">{knowledge.description}</p>
@@ -111,7 +110,7 @@ export default function MarketplacePage({ farmer }: MarketplacePageProps) {
                 <div className="flex justify-between items-start mb-2">
                   <h4 className="font-medium text-gray-900">{reward.item}</h4>
                   <span className="bg-yellow-100 text-yellow-800 px-2 py-1 rounded text-xs font-medium">
-                    {reward.cost} Credits
+                    {reward.cost} {t.marketplace.credits}
                   </span>
                 </div>
                 <p className="text-sm text-gray-600">{reward.description}</p>

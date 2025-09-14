@@ -1,9 +1,8 @@
 import { useState } from 'react';
-import { Leaf, MapPin } from 'lucide-react';
+import { Leaf, MapPin, ChevronDown } from 'lucide-react';
 import { useLanguage } from './LanguageContext';
 import { AppProps } from '../src/types';
 import { defaultFarmer, guild, bossChallenge, quests, leaderboard, dailyRiddle } from '../src/utils/mockData';
-
 // Import page components
 import DashboardPage from '../src/pages/DashboardPage';
 import QuestsPage from '../src/pages/QuestsPage';
@@ -17,12 +16,19 @@ function App({ userName, userLocation, onLoginClick }: AppProps) {
   const { t } = useLanguage();
   const [activeTab, setActiveTab] = useState('dashboard');
   const [showAIOracle, setShowAIOracle] = useState(false);
+  const [showProfileMenu, setShowProfileMenu] = useState(false);
 
-  const farmer = userName ? { 
-    ...defaultFarmer, 
-    name: userName, 
-    location: userLocation || defaultFarmer.location 
+  const farmer = userName ? {
+    ...defaultFarmer,
+    name: userName,
+    location: userLocation || defaultFarmer.location
   } : defaultFarmer;
+
+  const handleLogout = () => {
+    localStorage.removeItem('dhartiRakshakUser');
+    localStorage.removeItem('dhartiRakshakLanguage');
+    window.location.reload();
+  };
 
   const renderActiveTab = () => {
     switch (activeTab) {
@@ -59,28 +65,44 @@ function App({ userName, userLocation, onLoginClick }: AppProps) {
               </div>
             </div>
             
-            {/* User Profile */}
+            {/* User Profile / Login Button */}
             {userName ? (
-              <div className="flex items-center space-x-3">
-                <div className="text-right">
-                  <p className="text-sm font-medium text-gray-900">
-                    {farmer.title} {userName}
-                  </p>
-                  <p className="text-xs text-gray-600 flex items-center">
-                    <MapPin className="h-3 w-3 mr-1" />
-                    {userLocation || 'Location not set'}
-                  </p>
-                </div>
-                <div className="w-10 h-10 bg-gradient-to-r from-green-500 to-emerald-600 rounded-full flex items-center justify-center text-white font-semibold">
-                  {userName?.split(' ').map(n => n[0]).join('') || 'U'}
-                </div>
+              <div className="relative">
+                <button
+                  className="flex items-center space-x-3 text-right"
+                  onClick={() => setShowProfileMenu(!showProfileMenu)}
+                >
+                  <div className="flex flex-col items-end">
+                    <p className="text-sm font-medium text-gray-900">
+                      {t.titles[farmer.title as keyof typeof t.titles]} {userName}
+                    </p>
+                    <p className="text-xs text-gray-600 flex items-center">
+                      <MapPin className="h-3 w-3 mr-1" />
+                      {userLocation || t.header.locationNotSet}
+                    </p>
+                  </div>
+                  <div className="w-10 h-10 bg-gradient-to-r from-green-500 to-emerald-600 rounded-full flex items-center justify-center text-white font-semibold">
+                    {userName?.split(' ').map(n => n[0]).join('') || 'U'}
+                  </div>
+                  <ChevronDown className="h-4 w-4 text-gray-500" />
+                </button>
+                {showProfileMenu && (
+                  <div className="absolute right-0 mt-2 w-48 bg-white border border-gray-200 rounded-md shadow-lg z-10">
+                    <button
+                      onClick={handleLogout}
+                      className="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                    >
+                      {t.common.logout}
+                    </button>
+                  </div>
+                )}
               </div>
             ) : (
               <button 
                 className="bg-green-600 text-white px-4 py-2 rounded-lg font-medium hover:bg-green-700 transition-colors"
                 onClick={onLoginClick}
               >
-                Login
+                {t.header.signupLogin}
               </button>
             )}
           </div>
@@ -92,12 +114,12 @@ function App({ userName, userLocation, onLoginClick }: AppProps) {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex space-x-8">
             {[
-              { id: 'dashboard', label: 'Dashboard' },
-              { id: 'quests', label: 'Quests' },
-              { id: 'guild', label: 'Guild' },
-              { id: 'marketplace', label: 'Marketplace' },
-              { id: 'leaderboard', label: 'Leaderboard' },
-              { id: 'community', label: 'Community' }
+              { id: 'dashboard', label: t.navigation.dashboard },
+              { id: 'quests', label: t.navigation.myQuests },
+              { id: 'guild', label: t.navigation.myGuild },
+              { id: 'marketplace', label: t.navigation.marketplace },
+              { id: 'leaderboard', label: t.navigation.leaderboard },
+              { id: 'community', label: t.navigation.community }
             ].map((tab) => (
               <button
                 key={tab.id}
@@ -115,7 +137,7 @@ function App({ userName, userLocation, onLoginClick }: AppProps) {
               onClick={() => setShowAIOracle(true)}
               className="py-4 px-2 border-b-2 border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 font-medium text-sm transition-colors"
             >
-              AI Oracle
+              {t.header.aiOracle}
             </button>
           </div>
         </div>

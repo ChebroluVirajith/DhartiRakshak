@@ -20,6 +20,7 @@ export interface Translations {
     close: string;
     yes: string;
     no: string;
+    logout: string;
   };
 
   // Language Selection
@@ -63,6 +64,7 @@ export interface Translations {
     dayStreak: string;
     signupLogin: string;
     aiOracle: string;
+    locationNotSet: string;
   };
 
   // Navigation
@@ -100,6 +102,9 @@ export interface Translations {
     excellent: string;
     good: string;
     high: string;
+    poweredBySatelliteData: string;
+    spendInMandi: string;
+    totalPoints: string;
   };
 
   // Quests
@@ -123,6 +128,12 @@ export interface Translations {
     points: string;
     due: string;
     completed: string;
+    titles: {
+      '1': string;
+      '2': string;
+      '3': string;
+      '4': string;
+    };
   };
 
   // Guild
@@ -139,6 +150,15 @@ export interface Translations {
     members: string;
     level: string;
     rank: string;
+    progress: string;
+    chatMessages: {
+      message1: string;
+      time1: string;
+      message2: string;
+      time2: string;
+      message3: string;
+      time3: string;
+    };
   };
 
   // Leaderboard
@@ -148,7 +168,12 @@ export interface Translations {
     adarshKisanChallenge: string;
     modelFarmerTitle: string;
     panchayatLeague: string;
-    guildRankings: string;
+    guildRankings: {
+      milletMavericks: string;
+      waterWarriors: string;
+      basmatiBrigade: string;
+      greenGuardians: string;
+    };
     you: string;
     yourGuild: string;
     guildPoints: string;
@@ -170,6 +195,13 @@ export interface Translations {
     activeDhartiRakshaks: string;
     bossBattlesWon: string;
     solutionsOffered: string;
+    helpRequests: {
+      whiteFliesAttack: string;
+      soilPHAlkaline: string;
+      intercroppingSugarcane: string;
+    };
+    hoursAgo: string;
+    dayAgo: string;
   };
 
   // Marketplace
@@ -199,6 +231,20 @@ export interface Translations {
     organicCertificationSupport: string;
     dripIrrigationSubsidy: string;
     cropInsurancePremiumReduction: string;
+    credits: string;
+    organicFertilizerDiscountDesc: string;
+    seedQualityUpgradeDesc: string;
+    loanInterestReductionDesc: string;
+    advancedIPMMasterclassDesc: string;
+    soilTestingGuideDesc: string;
+    marketPricePredictionsDesc: string;
+    premiumAvatarFrameDesc: string;
+    farmDecorationPackDesc: string;
+    customGuildBadgeDesc: string;
+    sustainabilityScoreReq: string;
+    organicPracticesReq: string;
+    waterConservationScoreReq: string;
+    riskManagementScoreReq: string;
   };
 
   // AI Oracle
@@ -294,6 +340,7 @@ export const translations: Record<Language, Translations> = {
       close: 'Close',
       yes: 'Yes',
       no: 'No',
+      logout: 'Logout',
     },
     languageSelection: {
       title: 'Choose Your Language',
@@ -329,6 +376,7 @@ export const translations: Record<Language, Translations> = {
       dayStreak: 'Day Streak',
       signupLogin: 'Signup/Login',
       aiOracle: 'Krishi Rishi',
+      locationNotSet: 'Location not set',
     },
     navigation: {
       dashboard: 'Dashboard',
@@ -362,6 +410,9 @@ export const translations: Record<Language, Translations> = {
       excellent: 'Excellent',
       good: 'Good',
       high: 'High',
+      poweredBySatelliteData: 'Powered by satellite data',
+      spendInMandi: 'Spend in Mandi',
+      totalPoints: 'total points',
     },
     quests: {
       myQuests: 'My Quests',
@@ -383,6 +434,12 @@ export const translations: Record<Language, Translations> = {
       points: 'points',
       due: 'Due',
       completed: 'Completed',
+      titles: {
+        '1': 'Switch to Bio-Pesticides',
+        '2': 'Guild Challenge: Village Drip System',
+        '3': 'Defeat the Chemical Asur',
+        '4': 'Composting Challenge',
+      },
     },
     guild: {
       currentGuildChallenge: 'Current Guild Challenge',
@@ -397,6 +454,15 @@ export const translations: Record<Language, Translations> = {
       members: 'members',
       level: 'Level',
       rank: 'Rank',
+      progress: 'Progress',
+      chatMessages: {
+        message1: 'Just installed drip system on 2 acres! 💪',
+        time1: '2h ago',
+        message2: 'Great work! I can help with the next plot tomorrow',
+        time2: '1h ago',
+        message3: 'Sharing my neem oil recipe in the knowledge base',
+        time3: '30m ago',
+      },
     },
     leaderboard: {
       adarshKisanLeaderboard: 'Adarsh Kisan Leaderboard',
@@ -404,7 +470,12 @@ export const translations: Record<Language, Translations> = {
       adarshKisanChallenge: 'Adarsh Kisan Challenge',
       modelFarmerTitle: 'Compete for the title of Model Farmer in your region',
       panchayatLeague: 'Panchayat League - Guild Rankings',
-      guildRankings: 'Guild Rankings',
+      guildRankings: {
+        milletMavericks: 'Millet Mavericks',
+        waterWarriors: 'Water Warriors',
+        basmatiBrigade: 'Basmati Brigade',
+        greenGuardians: 'Green Guardians',
+      },
       you: 'You',
       yourGuild: 'Your Guild',
       guildPoints: 'guild points',
@@ -424,6 +495,13 @@ export const translations: Record<Language, Translations> = {
       activeDhartiRakshaks: 'Active Dharti Rakshaks',
       bossBattlesWon: 'Boss battles won',
       solutionsOffered: 'solutions offered',
+      helpRequests: {
+        whiteFliesAttack: 'White flies attacking my tomato crop',
+        soilPHAlkaline: 'Soil pH too alkaline, need organic solutions',
+        intercroppingSugarcane: 'Best intercropping options for sugarcane',
+      },
+      hoursAgo: 'hours ago',
+      dayAgo: 'day ago',
     },
     marketplace: {
       greenCreditsMandi: 'Green Credits Mandi',
@@ -451,6 +529,20 @@ export const translations: Record<Language, Translations> = {
       organicCertificationSupport: 'Organic Certification Support',
       dripIrrigationSubsidy: 'Drip Irrigation Subsidy',
       cropInsurancePremiumReduction: 'Crop Insurance Premium Reduction',
+      credits: 'Credits',
+      organicFertilizerDiscountDesc: '20% off next purchase',
+      seedQualityUpgradeDesc: 'Premium seeds at regular price',
+      loanInterestReductionDesc: '0.5% reduction for 6 months',
+      advancedIPMMasterclassDesc: 'Expert video series',
+      soilTestingGuideDesc: 'DIY testing methods',
+      marketPricePredictionsDesc: 'AI-powered insights',
+      premiumAvatarFrameDesc: 'Golden border for profile',
+      farmDecorationPackDesc: 'Beautify your virtual farm',
+      customGuildBadgeDesc: 'Design your guild emblem',
+      sustainabilityScoreReq: 'Sustainability Score: 80+',
+      organicPracticesReq: 'Organic Practices: 90%+',
+      waterConservationScoreReq: 'Water Conservation Score: 70+',
+      riskManagementScoreReq: 'Risk Management Score: 75%+',
     },
     aiOracle: {
       krishiRishiAIOracle: 'Krishi Rishi AI Oracle',
@@ -528,6 +620,7 @@ export const translations: Record<Language, Translations> = {
       close: 'మూసివేయండి',
       yes: 'అవును',
       no: 'లేదు',
+      logout: 'లాగ్ అవుట్',
     },
     languageSelection: {
       title: 'మీ భాషను ఎంచుకోండి',
@@ -539,7 +632,7 @@ export const translations: Record<Language, Translations> = {
       welcome: 'ఏగ్రిగేమ్‌కు స్వాగతం',
       subtitle: 'ధర్తి రక్షక ఉద్యమంలో చేరండి',
       phoneNumber: 'ఫోన్ నంబర్',
-      enterPhone: 'మీ ఫోన్ నంబర్‌ను నమోదు చేయండి',
+      enterPhone: 'మీ 10 అంకెల మొబైల్ నంబర్‌ని నమోదు చేయండి',
       getOTP: 'OTP పొందండి',
       enterOTP: 'OTP నమోదు చేయండి',
       verifyOTP: 'OTP ధృవీకరించండి',
@@ -557,12 +650,13 @@ export const translations: Record<Language, Translations> = {
       saveProfile: 'ప్రొఫైల్ సేవ్ చేయండి',
     },
     header: {
-      appName: 'ఏగ్రిగేమ్',
+      appName: 'అగ్రిగేమ్',
       subtitle: 'ధర్తి రక్షక వేదిక',
       credits: 'క్రెడిట్‌లు',
       dayStreak: 'రోజుల వరుస',
       signupLogin: 'సైన్‌అప్/లాగిన్',
       aiOracle: 'కృషి ఋషి',
+      locationNotSet: 'స్థానం సెట్ చేయబడలేదు',
     },
     navigation: {
       dashboard: 'డాష్‌బోర్డ్',
@@ -596,6 +690,9 @@ export const translations: Record<Language, Translations> = {
       excellent: 'అద్భుతం',
       good: 'మంచిది',
       high: 'అధికం',
+      poweredBySatelliteData: 'ఉపగ్రహ డేటా ద్వారా అందించబడింది',
+      spendInMandi: 'మార్కెట్‌లో ఖర్చు చేయండి',
+      totalPoints: 'మొత్తం పాయింట్లు',
     },
     quests: {
       myQuests: 'నా క్వెస్ట్‌లు',
@@ -617,6 +714,12 @@ export const translations: Record<Language, Translations> = {
       points: 'పాయింట్లు',
       due: 'గడువు',
       completed: 'పూర్తయింది',
+      titles: {
+        '1': 'జీవ కీటనాశకాలకు మారండి',
+        '2': 'గిల్డ్ సవాలు: గ్రామ చుక్కల వ్యవస్థ',
+        '3': 'రసాయన అసురుడిని ఓడించండి',
+        '4': 'కంపోస్ట్ సవాలు',
+      },
     },
     guild: {
       currentGuildChallenge: 'ప్రస్తుత గిల్డ్ సవాలు',
@@ -631,6 +734,15 @@ export const translations: Record<Language, Translations> = {
       members: 'సభ్యులు',
       level: 'స్థాయి',
       rank: 'ర్యాంక్',
+      progress: 'పురోగతి',
+      chatMessages: {
+        message1: 'జస్ట్ డ్రిప్ సిస్టమ్ 2 ఎకరాలలో ఇన్‌స్టాల్ చేసాను! 💪',
+        time1: '2గం క్రితం',
+        message2: 'చాలా మంచి పని! నేను రేపు తర్వాతి ప్లాట్‌లో సహాయం చేయగలను',
+        time2: '1గం క్రితం',
+        message3: 'నా వేప నూనె రెసిపీని నాలెడ్జ్ బేస్‌లో పంచుకుంటున్నాను',
+        time3: '30ని క్రితం',
+      },
     },
     leaderboard: {
       adarshKisanLeaderboard: 'ఆదర్శ కిసాన్ లీడర్‌బోర్డ్',
@@ -638,7 +750,12 @@ export const translations: Record<Language, Translations> = {
       adarshKisanChallenge: 'ఆదర్శ కిసాన్ సవాలు',
       modelFarmerTitle: 'మీ ప్రాంతంలో మోడల్ రైతు బిరుదు కోసం పోటీ పడండి',
       panchayatLeague: 'పంచాయతీ లీగ్ - గిల్డ్ ర్యాంకింగ్‌లు',
-      guildRankings: 'గిల్డ్ ర్యాంకింగ్‌లు',
+      guildRankings: {
+        milletMavericks: 'Millet Mavericks',
+        waterWarriors: 'Water Warriors',
+        basmatiBrigade: 'Basmati Brigade',
+        greenGuardians: 'Green Guardians',
+      },
       you: 'మీరు',
       yourGuild: 'మీ గిల్డ్',
       guildPoints: 'గిల్డ్ పాయింట్లు',
@@ -658,6 +775,13 @@ export const translations: Record<Language, Translations> = {
       activeDhartiRakshaks: 'క్రియాశీల ధర్తి రక్షకులు',
       bossBattlesWon: 'గెలిచిన బాస్ యుద్ధాలు',
       solutionsOffered: 'అందించిన పరిష్కారాలు',
+      helpRequests: {
+        whiteFliesAttack: 'నా టమేటో పంటపై తెల్లని ఈగలు దాడి చేస్తున్నాయి',
+        soilPHAlkaline: 'మట్టి pH చాలా క్షారంగా ఉంది, సేంద్రీయ పరిష్కారాలు కావాలి',
+        intercroppingSugarcane: 'చెరకుకు అత్యుత్తమ మధ్యపంట ఎంపికలు',
+      },
+      hoursAgo: 'గంటల క్రితం',
+      dayAgo: 'రోజు క్రితం',
     },
     marketplace: {
       greenCreditsMandi: 'గ్రీన్ క్రెడిట్‌ల మార్కెట్',
@@ -685,6 +809,20 @@ export const translations: Record<Language, Translations> = {
       organicCertificationSupport: 'సేంద్రీయ ధృవీకరణ మద్దతు',
       dripIrrigationSubsidy: 'చుక్కల నీటిపారుదల సబ్సిడీ',
       cropInsurancePremiumReduction: 'పంట భీమా ప్రీమియం తగ్గింపు',
+      credits: 'క్రెడిట్‌లు',
+      organicFertilizerDiscountDesc: 'తదుపరి కొనుగోలుపై 20% తగ్గింపు',
+      seedQualityUpgradeDesc: 'సాధారణ ధరకే ప్రీమియం విత్తనాలు',
+      loanInterestReductionDesc: '6 నెలలకు 0.5% తగ్గింపు',
+      advancedIPMMasterclassDesc: 'నిపుణుల వీడియో సిరీస్',
+      soilTestingGuideDesc: 'DIY పరీక్షా పద్ధతులు',
+      marketPricePredictionsDesc: 'AI-ఆధారిత అంతర్దృష్టులు',
+      premiumAvatarFrameDesc: 'ప్రొఫైల్‌కు గోల్డెన్ బోర్డర్',
+      farmDecorationPackDesc: 'మీ వర్చువల్ వ్యవసాయ క్షేత్రాన్ని అందంగా మార్చండి',
+      customGuildBadgeDesc: 'మీ గిల్డ్ చిహ్నాన్ని రూపొందించండి',
+      sustainabilityScoreReq: 'సుస్థిరత స్కోర్: 80+',
+      organicPracticesReq: 'సేంద్రీయ పద్ధతులు: 90%+',
+      waterConservationScoreReq: 'నీటి సంరక్షణ స్కోర్: 70+',
+      riskManagementScoreReq: 'రిస్క్ మేనేజ్‌మెంట్ స్కోర్: 75%+',
     },
     aiOracle: {
       krishiRishiAIOracle: 'కృషి ఋషి AI ఒరాకిల్',
@@ -762,6 +900,7 @@ export const translations: Record<Language, Translations> = {
       close: 'बंद करें',
       yes: 'हां',
       no: 'नहीं',
+      logout: 'लॉग आउट',
     },
     languageSelection: {
       title: 'अपनी भाषा चुनें',
@@ -773,10 +912,10 @@ export const translations: Record<Language, Translations> = {
       welcome: 'एग्रीगेम में आपका स्वागत है',
       subtitle: 'धरती रक्षक आंदोलन में शामिल हों',
       phoneNumber: 'फोन नंबर',
-      enterPhone: 'अपना फोन नंबर दर्ज करें',
+      enterPhone: 'अपना 10 अंकों का मोबाइल नंबर दर्ज करें',
       getOTP: 'OTP प्राप्त करें',
-      enterOTP: 'OTP दर्ज करें',
-      verifyOTP: 'OTP सत्यापित करें',
+      enterOTP: '6 अंकों का OTP दर्ज करें',
+      verifyOTP: 'सत्यापित करें और लॉगिन करें',
       resendOTP: 'OTP फिर से भेजें',
       invalidOTP: 'गलत OTP। कृपया पुनः प्रयास करें।',
       otpSent: 'OTP सफलतापूर्वक भेजा गया!',
@@ -797,6 +936,7 @@ export const translations: Record<Language, Translations> = {
       dayStreak: 'दिन की लकीर',
       signupLogin: 'साइनअप/लॉगिन',
       aiOracle: 'कृषि ऋषि',
+      locationNotSet: 'स्थान सेट नहीं है',
     },
     navigation: {
       dashboard: 'डैशबोर्ड',
@@ -830,6 +970,9 @@ export const translations: Record<Language, Translations> = {
       excellent: 'उत्कृष्ट',
       good: 'अच्छा',
       high: 'उच्च',
+      poweredBySatelliteData: 'उपग्रह डेटा द्वारा संचालित',
+      spendInMandi: 'मंडी में खर्च करें',
+      totalPoints: 'कुल अंक',
     },
     quests: {
       myQuests: 'मेरे क्वेस्ट',
@@ -851,6 +994,12 @@ export const translations: Record<Language, Translations> = {
       points: 'अंक',
       due: 'देय',
       completed: 'पूर्ण',
+      titles: {
+        '1': 'जैविक कीटनाशकों पर स्विच करें',
+        '2': 'गिल्ड चुनौती: गांव ड्रिप सिस्टम',
+        '3': 'रासायनिक असुर को हराएं',
+        '4': 'कंपोस्टिंग चुनौती',
+      },
     },
     guild: {
       currentGuildChallenge: 'वर्तमान गिल्ड चुनौती',
@@ -865,6 +1014,15 @@ export const translations: Record<Language, Translations> = {
       members: 'सदस्य',
       level: 'स्तर',
       rank: 'रैंक',
+      progress: 'प्रगति',
+      chatMessages: {
+        message1: 'अभी-अभी 2 एकड़ में ड्रिप सिस्टम लगाया है! 💪',
+        time1: '2घं पहले',
+        message2: 'बहुत बढ़िया काम! मैं कल अगले प्लॉट में मदद कर सकता हूं',
+        time2: '1घं पहले',
+        message3: 'ज्ञानकोष में अपनी नीम तेल की रेसिपी साझा कर रहा हूं',
+        time3: '30मि पहले',
+      },
     },
     leaderboard: {
       adarshKisanLeaderboard: 'आदर्श किसान लीडरबोर्ड',
@@ -872,7 +1030,12 @@ export const translations: Record<Language, Translations> = {
       adarshKisanChallenge: 'आदर्श किसान चुनौती',
       modelFarmerTitle: 'अपने क्षेत्र में आदर्श किसान के खिताब के लिए प्रतिस्पर्धा करें',
       panchayatLeague: 'पंचायत लीग - गिल्ड रैंकिंग',
-      guildRankings: 'गिल्ड रैंकिंग',
+      guildRankings: {
+        milletMavericks: 'Millet Mavericks',
+        waterWarriors: 'Water Warriors',
+        basmatiBrigade: 'Basmati Brigade',
+        greenGuardians: 'Green Guardians',
+      },
       you: 'आप',
       yourGuild: 'आपका गिल्ड',
       guildPoints: 'गिल्ड अंक',
@@ -892,6 +1055,13 @@ export const translations: Record<Language, Translations> = {
       activeDhartiRakshaks: 'सक्रिय धरती रक्षक',
       bossBattlesWon: 'जीती गई बॉस लड़ाइयां',
       solutionsOffered: 'प्रस्तुत समाधान',
+      helpRequests: {
+        whiteFliesAttack: 'मेरी टमाटर की फसल पर सफेद मक्खियों का हमला',
+        soilPHAlkaline: 'मिट्टी का pH बहुत क्षारीय है, जैविक समाधान चाहिए',
+        intercroppingSugarcane: 'गन्ने के लिए सर्वोत्तम सहफसली विकल्प',
+      },
+      hoursAgo: 'घंटे पहले',
+      dayAgo: 'दिन पहले',
     },
     marketplace: {
       greenCreditsMandi: 'हरित क्रेडिट मंडी',
@@ -919,6 +1089,20 @@ export const translations: Record<Language, Translations> = {
       organicCertificationSupport: 'जैविक प्रमाणन सहायता',
       dripIrrigationSubsidy: 'ड्रिप सिंचाई सब्सिडी',
       cropInsurancePremiumReduction: 'फसल बीमा प्रीमियम कटौती',
+      credits: 'क्रेडिट',
+      organicFertilizerDiscountDesc: 'अगली खरीद पर 20% छूट',
+      seedQualityUpgradeDesc: 'नियमित मूल्य पर प्रीमियम बीज',
+      loanInterestReductionDesc: '6 महीने के लिए 0.5% की कमी',
+      advancedIPMMasterclassDesc: 'विशेषज्ञ वीडियो श्रृंखला',
+      soilTestingGuideDesc: 'DIY परीक्षण के तरीके',
+      marketPricePredictionsDesc: 'AI-संचालित अंतर्दृष्टि',
+      premiumAvatarFrameDesc: 'प्रोफ़ाइल के लिए सुनहरा बॉर्डर',
+      farmDecorationPackDesc: 'अपने वर्चुअल खेत को सुंदर बनाएं',
+      customGuildBadgeDesc: 'अपने गिल्ड प्रतीक को डिज़ाइन करें',
+      sustainabilityScoreReq: 'स्थिरता स्कोर: 80+',
+      organicPracticesReq: 'जैविक अभ्यास: 90%+',
+      waterConservationScoreReq: 'जल संरक्षण स्कोर: 70%+',
+      riskManagementScoreReq: 'जोखिम प्रबंधन स्कोर: 75%+',
     },
     aiOracle: {
       krishiRishiAIOracle: 'कृषि ऋषि AI ओरेकल',
@@ -984,7 +1168,6 @@ export const translations: Record<Language, Translations> = {
     },
   },
 };
-
 export const getTranslations = (language: Language): Translations => {
   return translations[language] || translations.en;
 };
