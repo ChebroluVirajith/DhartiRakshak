@@ -1,5 +1,5 @@
-import { useState } from 'react';
-import { ChevronLeft, Check, Lock, Leaf, Loader2, Globe, User, MapPin } from 'lucide-react';
+import { useState, useEffect } from 'react';
+import { ChevronLeft, Check, Lock, Leaf, Loader2, Globe, User, MapPin, RefreshCcw } from 'lucide-react';
 import { RecaptchaVerifier, signInWithPhoneNumber, ConfirmationResult } from 'firebase/auth';
 import { auth } from './firebase';
 
@@ -43,28 +43,25 @@ interface TranslationTexts {
   invalidOTP: string;
   profileComplete: string;
   joiningPlatform: string;
+  fetchingLocation: string;
+  fetchLocationError: string;
+  tryAgain: string;
 }
 
 type StepType = 'phone' | 'otp' | 'language' | 'details' | 'complete';
 
 const LoginPage: React.FC<LoginPageProps> = ({ onBack, onLoginSuccess }) => {
-  // Step states
   const [currentStep, setCurrentStep] = useState<StepType>('phone');
-  
-  // Phone & OTP states
   const [phoneNumber, setPhoneNumber] = useState<string>('');
   const [otp, setOtp] = useState<string>('');
   const [confirmationResult, setConfirmationResult] = useState<ConfirmationResult | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string>('');
   const [appVerifier, setAppVerifier] = useState<RecaptchaVerifier | null>(null);
-  
-  // Language selection
   const [selectedLanguage, setSelectedLanguage] = useState<string>('en');
-  
-  // Farmer details
   const [farmerName, setFarmerName] = useState<string>('');
   const [farmerLocation, setFarmerLocation] = useState<string>('');
+  const [locationStatus, setLocationStatus] = useState<'idle' | 'fetching' | 'success' | 'error'>('idle');
 
   const languages: Language[] = [
     { code: 'en', name: 'English', native: 'English' },
@@ -96,7 +93,10 @@ const LoginPage: React.FC<LoginPageProps> = ({ onBack, onLoginSuccess }) => {
       otpSent: 'OTP sent to your mobile number',
       invalidOTP: 'Invalid OTP. Please try again.',
       profileComplete: 'Profile completed successfully!',
-      joiningPlatform: 'Joining the platform...'
+      joiningPlatform: 'Joining the platform...',
+      fetchingLocation: 'Fetching your location...',
+      fetchLocationError: 'Could not fetch location. Please enter it manually.',
+      tryAgain: 'Try again',
     },
     hi: {
       welcome: 'एग्रीगेम में आपका स्वागत है',
@@ -119,35 +119,37 @@ const LoginPage: React.FC<LoginPageProps> = ({ onBack, onLoginSuccess }) => {
       otpSent: 'आपके मोबाइल नंबर पर OTP भेजा गया',
       invalidOTP: 'अमान्य OTP। कृपया फिर से कोशिश करें।',
       profileComplete: 'प्रोफाइल सफलतापूर्वक पूरी हुई!',
-      joiningPlatform: 'प्लेटफॉर्म में शामिल हो रहे हैं...'
+      joiningPlatform: 'प्लेटफॉर्म में शामिल हो रहे हैं...',
+      fetchingLocation: 'आपका स्थान प्राप्त किया जा रहा है...',
+      fetchLocationError: 'स्थान प्राप्त नहीं हो सका। कृपया इसे मैन्युअल रूप से दर्ज करें।',
+      tryAgain: 'पुनः प्रयास करें',
     },
     te: {
-     welcome: 'అగ్రిగేమ్‌కి స్వాగతం',
-subtitle: 'భూమి రక్షక ప్లాట్‌ఫామ్‌లో చేరండి',
-phoneNumber: 'ఫోన్ నంబర్',
-enterPhone: 'మీ 10 అంకెల మొబైల్ నంబర్‌ని నమోదు చేయండి',
-getOTP: 'OTP పొందండి',
-enterOTP: '6 అంకెల OTP నమోదు చేయండి',
-verifyOTP: 'సరిపరచి లాగిన్ అవ్వండి',
-selectLanguage: 'మీ ఇష్టమైన భాషను ఎంచుకోండి',
-continue: 'కొనసాగించండి',
-farmerDetails: 'మీ ప్రొఫైల్ పూర్తి చేయండి',
-fullName: 'పూర్తి పేరు',
-enterName: 'మీ పూర్తి పేరును నమోదు చేయండి',
-location: 'ప్రాంతం',
-enterLocation: 'మీ నగరం/గ్రామం నమోదు చేయండి',
-completeProfile: 'ప్రొఫైల్ పూర్తి చేయండి',
-loading: 'లోడ్ అవుతోంది...',
-back: 'వెనక్కి',
-otpSent: 'మీ మొబైల్ నంబర్‌కి OTP పంపబడింది',
-invalidOTP: 'చెల్లని OTP. దయచేసి మళ్లీ ప్రయత్నించండి.',
-profileComplete: 'ప్రొఫైల్ విజయవంతంగా పూర్తైంది!',
-joiningPlatform: 'ప్లాట్‌ఫామ్‌లో చేరుతున్నారు...'
-
+      welcome: 'అగ్రిగేమ్‌కి స్వాగతం',
+      subtitle: 'భూమి రక్షక ప్లాట్‌ఫామ్‌లో చేరండి',
+      phoneNumber: 'ఫోన్ నంబర్',
+      enterPhone: 'మీ 10 అంకెల మొబైల్ నంబర్‌ని నమోదు చేయండి',
+      getOTP: 'OTP పొందండి',
+      enterOTP: '6 అంకెల OTP నమోదు చేయండి',
+      verifyOTP: 'సరిపరచి లాగిన్ అవ్వండి',
+      selectLanguage: 'మీ ఇష్టమైన భాషను ఎంచుకోండి',
+      continue: 'కొనసాగించండి',
+      farmerDetails: 'మీ ప్రొఫైల్ పూర్తి చేయండి',
+      fullName: 'పూర్తి పేరు',
+      enterName: 'మీ పూర్తి పేరును నమోదు చేయండి',
+      location: 'ప్రాంతం',
+      enterLocation: 'మీ నగరం/గ్రామం నమోదు చేయండి',
+      completeProfile: 'ప్రొఫైల్ పూర్తి చేయండి',
+      loading: 'లోడ్ అవుతోంది...',
+      back: 'వెనక్కి',
+      otpSent: 'మీ మొబైల్ నంబర్‌కి OTP పంపబడింది',
+      invalidOTP: 'చెల్లని OTP. దయచేసి మళ్లీ ప్రయత్నించండి.',
+      profileComplete: 'ప్రొఫైల్ విజయవంతంగా పూర్తైంది!',
+      joiningPlatform: 'ప్లాట్‌ఫామ్‌లో చేరుతున్నారు...',
+      fetchingLocation: 'మీ స్థానాన్ని పొందుతోంది...',
+      fetchLocationError: 'స్థానాన్ని పొందలేకపోయాము. దయచేసి దాన్ని మాన్యువల్‌గా నమోదు చేయండి.',
+      tryAgain: 'మళ్లీ ప్రయత్నించండి',
     },
-    
-
-    
   };
 
   const currentTranslations = translations[selectedLanguage] || translations.en;
@@ -156,7 +158,7 @@ joiningPlatform: 'ప్లాట్‌ఫామ్‌లో చేరుతు�
     if (!appVerifier) {
       const verifier = new RecaptchaVerifier(auth, 'recaptcha-container', {
         'size': 'invisible',
-        'callback': (_response: any) => {
+        'callback': () => {
           // reCAPTCHA solved
         },
         'expired-callback': () => {
@@ -240,12 +242,10 @@ joiningPlatform: 'ప్లాట్‌ఫామ్‌లో చేరుతు�
     setError('');
 
     try {
-      // Simulate API call to save user data
       await new Promise(resolve => setTimeout(resolve, 2000));
       
       setCurrentStep('complete');
       
-      // Complete the login process after showing success
       setTimeout(() => {
         const userData: UserData = {
           phoneNumber: `+91${phoneNumber}`,
@@ -254,8 +254,8 @@ joiningPlatform: 'ప్లాట్‌ఫామ్‌లో చేరుతు�
           language: selectedLanguage
         };
         
-        // Save language to localStorage immediately
         localStorage.setItem('dhartiRakshakLanguage', selectedLanguage);
+        localStorage.setItem('dhartiRakshakUserData', JSON.stringify(userData));
         
         onLoginSuccess(userData);
       }, 2000);
@@ -275,6 +275,103 @@ joiningPlatform: 'ప్లాట్‌ఫామ్‌లో చేరుతు�
       onBack();
     }
   };
+
+  const fetchLocation = (): void => {
+    setLocationStatus('fetching');
+    setError('');
+    setFarmerLocation('');
+
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        async (position) => {
+          const { latitude, longitude } = position.coords;
+          try {
+            // Using OpenStreetMap's Nominatim API for reverse geocoding (free alternative)
+            const response = await fetch(
+              `https://nominatim.openstreetmap.org/reverse?format=json&lat=${latitude}&lon=${longitude}&addressdetails=1`
+            );
+            
+            if (!response.ok) {
+              throw new Error('Geocoding service unavailable');
+            }
+            
+            const data = await response.json();
+            
+            // Extract meaningful location components
+            const address = data.address || {};
+            const locationParts = [];
+            
+            if (address.village || address.town || address.city) {
+              locationParts.push(address.village || address.town || address.city);
+            }
+            
+            if (address.state_district || address.county) {
+              locationParts.push(address.state_district || address.county);
+            }
+            
+            if (address.state) {
+              locationParts.push(address.state);
+            }
+            
+            const locationName = locationParts.length > 0 
+              ? locationParts.join(', ') 
+              : data.display_name || `${latitude.toFixed(4)}, ${longitude.toFixed(4)}`;
+            
+            setFarmerLocation(locationName);
+            setLocationStatus('success');
+            
+          } catch (err) {
+            console.error("Geocoding API failed:", err);
+            
+            // Fallback: Use coordinates if geocoding fails
+            const fallbackLocation = `${latitude.toFixed(4)}°N, ${longitude.toFixed(4)}°E`;
+            setFarmerLocation(fallbackLocation);
+            setLocationStatus('success');
+            
+            // Show a warning but don't treat it as an error
+            console.warn("Using coordinates as fallback location");
+          }
+        },
+        (error) => {
+          console.error("Geolocation failed:", error);
+          setLocationStatus('error');
+          
+          let errorMessage = currentTranslations.fetchLocationError;
+          
+          switch (error.code) {
+            case error.PERMISSION_DENIED:
+              errorMessage = "Location access denied. Please enable location permissions.";
+              break;
+            case error.POSITION_UNAVAILABLE:
+              errorMessage = "Location information unavailable.";
+              break;
+            case error.TIMEOUT:
+              errorMessage = "Location request timed out.";
+              break;
+            default:
+              errorMessage = "An unknown error occurred while fetching location.";
+              break;
+          }
+          
+          setError(errorMessage);
+        },
+        { 
+          enableHighAccuracy: true, 
+          timeout: 10000, // Increased timeout
+          maximumAge: 300000 // Cache location for 5 minutes
+        }
+      );
+    } else {
+      setLocationStatus('error');
+      setError('Geolocation is not supported by your browser.');
+    }
+  };
+
+  useEffect(() => {
+    if (currentStep === 'details') {
+      fetchLocation();
+    }
+  }, [currentStep]);
 
   const renderPhoneStep = (): JSX.Element => (
     <div className="space-y-4">
@@ -421,9 +518,24 @@ joiningPlatform: 'ప్లాట్‌ఫామ్‌లో చేరుతు�
             value={farmerLocation}
             onChange={(e) => setFarmerLocation(e.target.value)}
             className="block w-full pl-10 pr-3 py-3 border border-gray-300 rounded-lg placeholder-gray-400 focus:outline-none focus:ring-green-500 focus:border-green-500"
-            placeholder={currentTranslations.enterLocation}
+            placeholder={
+              locationStatus === 'fetching' ? currentTranslations.fetchingLocation : currentTranslations.enterLocation
+            }
+            disabled={locationStatus === 'fetching'}
           />
         </div>
+        {locationStatus === 'error' && (
+          <div className="flex justify-between items-center text-sm mt-2">
+            <p className="text-red-600 flex items-center space-x-1">
+              <MapPin className="h-4 w-4" />
+              <span>{currentTranslations.fetchLocationError}</span>
+            </p>
+            <button onClick={fetchLocation} className="flex items-center text-blue-600 hover:underline">
+              <RefreshCcw className="h-4 w-4 mr-1" />
+              {currentTranslations.tryAgain}
+            </button>
+          </div>
+        )}
       </div>
       <button
         onClick={handleCompleteProfile}
@@ -495,7 +607,6 @@ joiningPlatform: 'ప్లాట్‌ఫామ్‌లో చేరుతు�
         {currentStep === 'details' && renderDetailsStep()}
         {currentStep === 'complete' && renderCompleteStep()}
 
-        {/* Progress indicator */}
         <div className="flex justify-center space-x-2 mt-6">
           {['phone', 'otp', 'language', 'details'].map((step, index) => (
             <div
